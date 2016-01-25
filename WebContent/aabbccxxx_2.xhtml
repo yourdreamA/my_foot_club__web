@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}"
+ class="login_page" xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <f:view>
+    <h:head>
+    </h:head>
+    <h:body>
+    
+    
+    <h:form>
+    	<h:selectOneMenu id="chosen_championnat" styleClass="form-control input-sm" value="#{adminParserBean.idSelectedChampionnat}">
+					<f:selectItem itemValue="0" itemLabel="" />
+					<f:selectItems value="#{appBean.listChampionnat}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+					<f:ajax event="change" listener="#{adminParserBean.init()}" 
+					execute="chosen_championnat" render="panel_InputText" /> 
+		</h:selectOneMenu>
+		</h:form>
+	<h:form id="panel_InputText">
+    <h:panelGrid  columns="2">
+    	<h:outputLabel>Journee : </h:outputLabel>
+    	<h:inputText value="#{adminParserBean.journee}"></h:inputText>
+    	
+    	
+    	
+    	<h:outputLabel>id url</h:outputLabel>
+    	<h:inputText value="#{adminParserBean.idUrl}"></h:inputText>
+    	
+    	
+    </h:panelGrid>
+    
+    <h:panelGrid  columns="4">
+    	<h:outputLabel>Equipe 1 : </h:outputLabel>
+    	<h:selectOneMenu id="chosen_equipe_1" value="#{adminParserBean.idEq1}">
+				<f:selectItem itemValue="0" itemLabel="" />
+				<f:selectItems value="#{appBean.mapEquipe[adminParserBean.idSelectedChampionnat]}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+		</h:selectOneMenu>
+		<h:outputLabel>Nombre but : </h:outputLabel>
+    	<h:inputText value="#{adminParserBean.nbrButEq1}"></h:inputText>
+    	
+    	
+    	<h:outputLabel>Equipe 2 : </h:outputLabel>
+    	<h:selectOneMenu id="chosen_equipe_2" value="#{adminParserBean.idEq2}">
+				<f:selectItem itemValue="0" itemLabel="" />
+				<f:selectItems value="#{appBean.mapEquipe[adminParserBean.idSelectedChampionnat]}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+		</h:selectOneMenu>
+		<h:outputLabel>Nombre but : </h:outputLabel>
+    	<h:inputText value="#{adminParserBean.nbrButEq2}"></h:inputText>
+    	
+    	
+    </h:panelGrid>
+    
+    
+    <h:commandButton value="Lancer parse" action="#{adminParserBean.parseMatch}"></h:commandButton>
+    	
+    	
+    </h:form>
+    
+    <h:dataTable id="dataTable_messages_id_1" value="#{adminParserBean.listErreurs}" var="u" styleClass="table table-striped table-bordered dTableR dataTable">
+  
+  <h:column>
+    <f:facet name="header">Messages</f:facet>
+    #{u}
+  </h:column>
+
+  
+ 
+</h:dataTable>
+
+<h:dataTable id="dataTable_messages_id_2" value="#{adminParserBean.listErreurs2}" var="u" styleClass="table table-striped table-bordered dTableR dataTable">
+  
+  <h:column>
+    <f:facet name="header">Messages</f:facet>
+    #{u}
+  </h:column>
+
+  
+ 
+</h:dataTable>
+    
+    </h:body>
+    </f:view>
+    </html>

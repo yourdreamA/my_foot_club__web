@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+
+	<composite:attribute name="clientId" />
+	<composite:attribute name="forI" />
+
+</composite:interface>
+
+<composite:implementation>
+
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<h:outputScript name="busystatus/busystatus.js" target="head" />
+	<script type="text/javascript">
+		busystatusdemo.init("#{cc.clientId}", "#{cc.attrs.forI}");
+	</script>
+
+	<span id="#{cc.clientId}" style="display: none;"> <h:graphicImage
+			id="busyindicator" height="200" width="200" name="img/wait.gif" />
+	</span>
+
+</composite:implementation>
+
+</html>

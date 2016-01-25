@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	<h:head>
+		<style type="text/css">
+		.imgEquipe {
+	width: 60px;
+	height: 50px;
+}
+.col1 {
+	width: 20%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : bottom;
+}
+
+.col2 {
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+
+.col3 {
+	width: 30%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+.colResBut {
+	width: 20px;
+	/*width: 5%;*/
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+.colResBut2 {
+	width: 20px;
+	/*width: 2%;*/
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+.colEquipe {
+	width: 300px;
+	/*width: 44%;*/
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+</style>
+	</h:head>
+
+	<h:body>
+		<ui:composition template="template/layoutForm.xhtml">
+			<ui:define name="title">#{i18n[sessionBean.selectedChampionnat.libelle]}</ui:define>
+
+			<ui:define name="content">
+
+				<div class="row search_page">
+
+					<div class="col-sm-12 col-md-12">
+
+						<h3 class="heading">
+							<small>#{i18n[sessionBean.selectedChampionnat.libelle]}</small> #{sessionBean.selectedChampionnat.libelleSaison}
+						</h3>
+
+
+						<!-- FILTER -->
+						<div class="well clearfix">
+							<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'} col-sm-3 col-md-3">
+								<h:form styleClass="input-group input-group-sm">
+								<span class="sepV_c"> #{i18n['msg_journee']} : 
+										<h:selectOneMenu
+											id="chosen_Journee" styleClass="form-control input-sm"
+											value="#{listMatcheBean.selectedJournee}">
+											<f:selectItems value="#{appBean.mapJournee[sessionBean.selectedChampionnat.id]}"></f:selectItems>
+											<f:ajax event="change"
+												listener="#{listMatcheBean.doSearch}" execute="chosen_Journee"
+												render="dataTable_user_id dt_a_info_id form_pagination" />
+										</h:selectOneMenu>
+									</span>
+									
+									
+										
+									</h:form>
+							</div>
+
+						</div>
+						<!-- end FILTER -->
+
+
+						<h:dataTable id="dataTable_user_id" binding="#{dataTableMatch}"
+							value="#{listMatcheBean.listMatch}" var="m"
+							styleClass="table table-striped" style="text-align: center;vertical-align : middle">
+							<h:column headerClass="col1">
+								<!--f:facet name="header">#{i18n['message_date']}</f:facet-->
+    							
+    							<h:outputLabel value="#{m.dateM}" >
+              						<f:convertDateTime pattern="EEEE, d MMMMMM yyyy kk:mm" locale="#{localeBean.language.locale}" />
+ 								</h:outputLabel>
+  							</h:column>
+							<h:column headerClass="col2">
+								<!--f:facet name="header">#{i18n['message_match']}</f:facet-->
+									<h:panelGrid columns="5" width="100%" style="width: 660px; margin-left: 0px;"
+									columnClasses="colEquipe, colResBut, colResBut2, colResBut, colEquipe" >
+										
+										<h:panelGrid columns="1" style="width: 300px; margin-left: 0px;">
+											<h:outputLabel>#{localeBean.language.arabic ? m.eq1.libelle_ar : m.eq1.libelle}</h:outputLabel>
+											<h:graphicImage library="ch_icons" name="#{m.eq1.logo}"
+												styleClass="imgEquipe"></h:graphicImage>
+											
+										</h:panelGrid>
+										
+										<h:panelGrid columns="1" style="width: 20px; margin-left: 0px;">
+											<h:outputLabel style="font-size: 200%;">#{m.joue == 1 ? m.nbrButEq1 : "."}</h:outputLabel>
+										</h:panelGrid>
+										<h:panelGrid columns="1" style="width: 20px; margin-left: 0px;">
+											<h:outputLabel style="font-size: 200%;">-</h:outputLabel>
+										</h:panelGrid>
+										<h:panelGrid columns="1" style="width: 20px; margin-left: 0px;">
+											<h:outputLabel style="font-size: 200%;">#{m.joue == 1 ? m.nbrButEq2 : "."}</h:outputLabel>
+										</h:panelGrid>
+										<h:panelGrid columns="1" style="width: 300px; margin-left: 0px;">
+											<h:outputLabel>#{localeBean.language.arabic ? m.eq2.libelle_ar : m.eq2.libelle}</h:outputLabel>
+											<h:graphicImage library="ch_icons" name="#{m.eq2.logo}"
+												styleClass="imgEquipe"></h:graphicImage>
+										</h:panelGrid>
+										
+									
+									</h:panelGrid>
+									
+										
+									
+
+										
+
+							</h:column>
+							
+					
+
+							<!--h:column headerClass="col3">
+								<f:facet name="header">#{i18n['message_terrain']}</f:facet>
+    								<h:outputLabel>#{m.lieu}</h:outputLabel>
+  							</h:column-->
+						</h:dataTable>
+
+
+
+
+
+					</div>
+				</div>
+
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

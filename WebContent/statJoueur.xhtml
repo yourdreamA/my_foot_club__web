@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   <f:view>
+    <f:metadata>
+  		<f:viewParam name="id_j" value="#{statJoueurBean.idSelectedJoueur}" required="true"/>
+  		<f:viewAction  action="#{statJoueurBean.doSearch}" />
+	</f:metadata>
+	
+
+	<h:head>
+		<style type="text/css">
+.colPosition {
+	width: 20%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.colEquipe {
+	width: 40%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.colDateN {
+	width: 30%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.colCout {
+	width: 10%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: middle;
+}
+</style>
+	</h:head>
+	<h:body>
+<ui:composition template="template/layoutForm.xhtml">
+<ui:define name="title">Joueurs</ui:define>
+
+<ui:define name="content">
+
+<div class="row search_page">
+ 
+    <div class="col-sm-12 col-md-12">
+    
+    	<h3 class="heading">#{localeBean.language.arabic ? statJoueurBean.selectedJoueur.nomJ_ar : statJoueurBean.selectedJoueur.nomJ}</h3>
+    	
+		
+		<!-- ENTETE -->
+		
+		
+		<div class="well clearfix">
+			
+			<h:panelGrid width="100%" columns="4" columnClasses="colPosition, colEquipe, colDateN, colCout">
+				<h:outputLabel>#{i18n['message_position']}</h:outputLabel>
+				<h:outputLabel>#{i18n['message_equipe']}</h:outputLabel>
+				<h:outputLabel>#{i18n['stat_j_dateNaissance']}</h:outputLabel>
+				<h:outputLabel>#{i18n['message_cout']}</h:outputLabel>
+				
+				<h:outputLabel>#{i18n[statJoueurBean.selectedJoueur.labelPosition]}</h:outputLabel>
+				<h:outputLabel rendered="#{localeBean.language.arabic}">#{statJoueurBean.selectedJoueur.labelEquipe_ar}</h:outputLabel>
+				<h:outputLabel rendered="#{!localeBean.language.arabic}">#{statJoueurBean.selectedJoueur.labelEquipe}</h:outputLabel>
+				<h:outputLabel value="#{statJoueurBean.selectedJoueur.dateNaissance}" >
+              		<f:convertDateTime pattern="dd.MM.yyyy" />
+ 				</h:outputLabel>
+				<h:outputLabel>#{statJoueurBean.selectedJoueur.cout}</h:outputLabel>
+			</h:panelGrid>
+			
+			 </div>
+        <!-- end ENTETE -->
+			
+			
+			
+			<h:dataTable id="dataTable_user_id" value="#{statJoueurBean.selectedJoueur.stats}" var="u" 
+styleClass="table table-striped table-bordered dTableR dataTable" >
+	
+  	
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_journee']}</f:facet>
+    		<h:panelGroup border="1" rendered="#{u.participe==1}">
+    			#{u.journee.numero}
+    			<i class="splashy-check"></i>
+    		</h:panelGroup>
+    		<h:panelGroup columns="1" border="1" frame="below" rendered="#{u.participe!=1}">
+    			#{u.journee.numero}
+    			<br/>-
+    		</h:panelGroup>
+    		<h:panelGroup rendered="#{u.participe==1}">
+    			<br/><strong>1</strong>
+    		</h:panelGroup>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_play_more_60']}</f:facet>
+    
+    	<h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrMinuteJoue >= 60}">
+    			<i class="splashy-check"></i>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrMinuteJoue &lt; 60}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrMinuteJoue >= 60}">
+    			<strong>2</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_goal_scor']}</f:facet>
+    	<h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrBut > 0}">
+    			#{u.nbrBut}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrBut == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrBut > 0}">
+    			<strong>#{u.nbrButPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['stat_j_assist']}</f:facet>
+    
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrAssist > 0}">
+    			#{u.nbrAssist}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrAssist == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrAssist > 0}">
+    			<strong>#{u.nbrAssistPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['stat_j_shot_in_goal']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrShotInG > 0}">
+    			#{u.nbrShotInG}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrShotInG == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrShotInG > 0}">
+    			<strong>#{u.nbrShotInGPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['stat_j_shot_pen']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenalty > 0}">
+    			#{u.nbrPenalty}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenalty == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrPenalty > 0}">
+    			<strong>#{u.nbrPenaltyPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_miss_pen']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenaltyRate > 0}">
+    			#{u.nbrPenaltyRate}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenaltyRate == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrPenaltyRate > 0}">
+    			<strong>#{u.nbrPenaltyRatePt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_repouss_tir']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSave > 0}">
+    			#{u.nbrSave}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSave == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrSave > 0}">
+    			<strong>#{u.nbrSave}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_repouss_pen']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSavePenalty > 0}">
+    			#{u.nbrSavePenalty}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSavePenalty == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrSavePenalty > 0}">
+    			<strong>#{u.nbrSavePenaltyPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_goal_a']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrButRecu > 0}">
+    			#{u.nbrButRecu}
+    		</h:panelGrid>
+
+    		<h:panelGrid rendered="#{u.nbrButRecu > 0}">
+    			<strong>#{u.nbrButRecuPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_clean_sheet']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrButRecu == 0}">
+    			<i class="splashy-check"></i>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrButRecu > 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrButRecu == 0}">
+    			<strong>#{u.cleanSheet}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_card_y']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonJ == 1}">
+    			<h:graphicImage library="icons" name="yellow_card.png" width="16px" height="16px"></h:graphicImage>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonJ == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.cartonJ == 1}">
+    			<strong>#{u.cartonJPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_card_r']}</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonR == 1}">
+    			<h:graphicImage library="icons" name="red_card.png" width="16px" height="16px"></h:graphicImage>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonR == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.cartonR == 1}">
+    			<strong>-2</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_total_point']}</f:facet>
+    <strong>#{u.totalP}</strong>
+  </h:column>
+  
+</h:dataTable>
+			
+			
+			
+			
+			
+       
+  
+
+
+
+
+					</div></div>
+
+</ui:define>
+    </ui:composition>
+    </h:body>
+    </f:view>
+</html>

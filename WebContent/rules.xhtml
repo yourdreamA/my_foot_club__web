@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   <f:view>
+
+	<h:body>
+<ui:composition template="template/layoutForm.xhtml">
+
+<ui:define name="content">
+
+<div class="row search_page">
+ 
+    <div class="col-sm-12 col-md-12">
+    
+    	<h3 class="heading">#{i18n['rules.title']}</h3>
+    		
+		
+		<!-- ENTETE -->
+		
+		
+		<div class="well clearfix" style="font-family: Arial,Helvetica Neue,Helvetica,sans-serif;font-size: 24px;">
+			#{i18n['rules.0']}<br/><br/>
+			
+			<br/><br/>
+			- #{i18n['rules.2']}
+			<br/><br/>
+			
+			<h:dataTable id="dataTable_user_id" value="#{appBean.listReglesJoueurs}" var="u" 
+styleClass="table table-striped table-bordered dTableR dataTable" style="font-family: Arial,Helvetica Neue,Helvetica,sans-serif;font-size: 14px;" >
+	
+  	
+  <h:column>
+    <f:facet name="header">#{i18n['message_position']}</f:facet>
+ <strong>#{i18n[u.positionJoueurLabel]}</strong>
+  </h:column>
+ 
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_play_more_60']}</f:facet>
+    
+ 		#{u.nbrMinuteJoue}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_goal_scor']}</f:facet>
+    			#{u.nbrBut}
+    		
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['stat_j_assist']}</f:facet>
+    
+    			#{u.nbrAssist}
+    	
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['stat_j_shot_in_goal']}</f:facet>
+    			#{u.nbrShotInG}
+    	
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['stat_j_shot_pen']}</f:facet>
+    			#{u.nbrPenalty}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_miss_pen']}</f:facet>
+    			#{u.nbrPenaltyRate}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_repouss_tir']}</f:facet>
+    			#{u.nbrSave}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_repouss_pen']}</f:facet>
+    			#{u.nbrSavePenalty}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_goal_a']}</f:facet>
+    			#{u.nbrButRecu}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_clean_sheet']}</f:facet>
+    			#{u.cleanSheetS}
+    
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_card_y']}</f:facet>
+    			#{u.cartonJ}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['stat_j_card_r']}</f:facet>
+    		#{u.cartonR}
+  </h:column>
+
+  
+</h:dataTable>
+			<br/><br/>
+			- #{i18n['rules.3']}
+			<br/><br/>
+			- #{i18n['rules.4']}
+			<br/><br/>
+			- #{i18n['rules.1']}
+			<br/><br/>
+			 </div>
+        <!-- end ENTETE -->
+			
+			
+
+					</div></div>
+
+</ui:define>
+    </ui:composition>
+    </h:body>
+    </f:view>
+</html>

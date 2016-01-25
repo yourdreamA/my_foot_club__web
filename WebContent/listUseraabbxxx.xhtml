@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   <f:view>
+   <h:body>
+   <ui:composition template="template/layoutForm.xhtml">
+   <ui:define name="content">
+   <h:dataTable id="dataTable_user_manager_id" value="#{listUserManagerBean.listUser}" var="u" styleClass="table table-striped table-bordered dTableR dataTable">
+	
+	<h:column>
+    <f:facet name="header">ID</f:facet>
+    #{u.id}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_username']}</f:facet>
+    #{u.username}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['register_user_email']}</f:facet>
+    #{u.mail}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">pwd</f:facet>
+    #{u.pwd}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">Last Log</f:facet>
+    #{u.lastLogin}
+  </h:column>
+  
+    <h:column>
+    <f:facet name="header">Liga</f:facet>
+    #{u.eqUserEsp}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">lst upd(liga)</f:facet>
+    #{u.lastUpdateUserEsp}
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">Prem</f:facet>
+    #{u.eqUserEng}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">lst upd(prem)</f:facet>
+    #{u.lastUpdateUserEng}
+  </h:column>
+
+  
+ 
+</h:dataTable>
+   </ui:define>
+   </ui:composition>
+   </h:body>
+   </f:view>
+   </html>

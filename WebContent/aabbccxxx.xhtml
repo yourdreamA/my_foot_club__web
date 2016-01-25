@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}"
+ class="login_page" xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <f:view>
+    <h:head>
+    </h:head>
+    <h:body>
+    
+    
+    <h:form>
+    	<h:selectOneMenu id="chosen_championnat" styleClass="form-control input-sm" value="#{adminBatchBean.idSelectedChampionnat}">
+					<f:selectItem itemValue="0" itemLabel="" />
+					<f:selectItems value="#{appBean.listChampionnat}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+					<f:ajax event="change" listener="#{adminBatchBean.ddd(0)}" 
+					execute="chosen_championnat" render="panel_InputText" /> 
+		</h:selectOneMenu>
+		</h:form>
+	<h:form id="panel_InputText">
+    <h:panelGrid  columns="3">
+    	<h:outputLabel>1 - batch calcul total point joueur. Journee : </h:outputLabel>
+    	<h:inputText value="#{adminBatchBean.journeePtJr}"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.traiterTotalPointJoueurParJournee}"></h:commandButton>
+    	
+    	
+    	
+    	<h:outputLabel>2 - batch calcul total point joueur (periode)</h:outputLabel>
+    	<h:inputText></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.traiterTotalPointJoueurParPeriode}"></h:commandButton>
+    	
+    	<h:outputLabel>3 - batch calcul total point joueur (saison)</h:outputLabel>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.traiterTotalPointJoueurParSaison}"></h:commandButton>
+    	
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	
+    	
+    	<h:outputLabel>5 - batch calcul total point user journee : </h:outputLabel>
+    	<h:inputText  value="#{adminBatchBean.journeePtUsr}"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.updatePointUserJournee}"></h:commandButton>
+    	
+    	<h:outputLabel>6 - batch calcul total point user (saison)</h:outputLabel>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.updatePointUserSaison}"></h:commandButton>
+    	
+    	
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	
+    	
+    	
+    	<h:outputLabel>7 - batch Incrementer cout joueurs</h:outputLabel>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.traiterCoutJoueur}"></h:commandButton>
+    	
+    	
+    	<h:outputLabel>8 - batch Incrementer solde users</h:outputLabel>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.traiterSoldeUsers}"></h:commandButton>
+    	
+    	
+    	
+    	
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	
+    	<h:outputLabel>4 - batch copy equipe user journee</h:outputLabel>
+    	<h:inputText  value="#{adminBatchBean.journeeCpEqUsr}"></h:inputText>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.copyEquipeUser}"></h:commandButton>
+    	
+    	
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	
+    	<h:commandLink action="/initMatchesaabbxxx.xhtml?faces-redirect=true">
+					Gestion des matches</h:commandLink>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:outputLabel></h:outputLabel>
+    	
+    	
+    	<h:commandLink action="/aabbccxxx_2.xhtml?faces-redirect=true">
+					Parse statistique</h:commandLink>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:outputLabel></h:outputLabel>
+    	
+    	
+    	<h:commandLink action="/listUseraabbxxx.xhtml?faces-redirect=true">
+					Liste users</h:commandLink>
+    	<h:inputText disabled="true"></h:inputText>
+    	<h:outputLabel></h:outputLabel>
+    	
+    	
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	
+    	<h:outputLabel>Initialise equipes users</h:outputLabel>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.initEquipeUser}"></h:commandButton>
+    	<h:outputLabel></h:outputLabel>
+    	
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	<h:outputLabel>--------------------------       ADD MESSAGE      -----------------------------------</h:outputLabel>
+    	<h:outputLabel>-------------------------------------------------------------------------------------</h:outputLabel>
+    	
+    	
+    	<h:outputLabel>ADD MESSAGE</h:outputLabel>
+    	<h:inputTextarea cols="20" style="width : 500px;height : 150px" value="#{adminBatchBean.message}"></h:inputTextarea>
+    	<h:commandButton value="Lancer" action="#{adminBatchBean.addComment}"></h:commandButton>
+    	
+    	
+    	
+    </h:panelGrid>
+    	
+    	
+    	
+    </h:form>
+    
+    </h:body>
+    </f:view>
+    </html>

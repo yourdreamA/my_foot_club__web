@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ class="login_page" xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    
+    
+    <h:body>
+    <ui:composition template="template/loginForm.xhtml">
+			<ui:define name="title">Login</ui:define>
+
+			<ui:define name="content">
+		<div class="login_box">
+			
+			<h:form id="login_form">
+				<div class="top_b">#{i18n['message_signin']}</div>
+				<div class="alert alert-success alert-dismissable alert-login">
+                <strong>#{i18n['msg_login_succes']}</strong>
+            	</div> 
+				<div class="alert alert-danger alert-dismissable alert-login" style="#{not empty facesContext.maximumSeverity ? '' : 'display : none'}">
+                <strong><h:messages for="login_form"  /></strong>
+            	</div> 
+				<!--div class="alert alert-info alert-login">
+					
+				</div-->
+				<div class="cnt_b">
+					<div class="form-group #{not b_username.valid ? 'f_error' : ''}">
+						<div class="input-group">
+							<span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
+							<h:inputText id="username" binding="#{b_username}"
+										styleClass="form-control input-sm"
+										 p:type="text" p:placeholder="#{i18n['message_username']}"
+										 value="#{loginBean.login.username}"
+										 required="true"
+										 requiredMessage="#{i18n['error_login_username_requiredMessage']}"
+										></h:inputText>
+							
+						</div>
+						<h:outputLabel styleClass="error" rendered="#{not b_username.valid}">
+							<h:message id="m1" for="username" />
+						</h:outputLabel>
+						
+					</div>
+					<div class="form-group #{not b_pwd.valid ? 'f_error' : ''}">
+						<div class="input-group">
+							<span class="input-group-addon input-sm"><i class="glyphicon glyphicon-lock"></i></span>
+							<h:inputSecret id="password" binding="#{b_pwd}"
+										styleClass="form-control input-sm"
+										 p:placeholder="#{i18n['message_pwd']}" 
+										value="#{loginBean.login.pwd}"
+										required="true"
+										 requiredMessage="#{i18n['error_login_pwd_requiredMessage']}"
+										></h:inputSecret>
+						</div>
+						<h:outputLabel styleClass="error" rendered="#{not b_pwd.valid}">
+							<h:message id="m2" for="password" />
+						</h:outputLabel>
+					</div>
+					<!--div class="form-group">
+						<label class="checkbox-inline"><input type="checkbox" /> Remember me</label>
+					</div-->
+				</div>
+				<div class="btm_b clearfix">
+					<h:commandButton id="button" value="#{i18n['button_signin']}" 
+					 action="#{loginBean.doLogin}" styleClass="btn btn-default btn-sm pull-right"/>
+					<span class="link_reg">
+						<h:commandLink immediate="true" action="addUser" value="#{i18n['message_registration']}"/>
+					</span>
+				</div>  
+			</h:form>
+			
+			<!--div class="links_b links_btm clearfix">
+				<span class="linkform"><a href="#pass_form">Forgot password?</a></span>
+				<span class="linkform" style="display:none">Never mind, <a href="#login_form">send me back to the sign-in screen</a></span>
+			</div-->
+			
+		</div>
+			
+			</ui:define>
+		</ui:composition>
+    </h:body>
+</html>

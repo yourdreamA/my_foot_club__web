@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}"  xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+   xmlns:utils="http://java.sun.com/jsf/composite/utils"
+   xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+   <f:view>
+   <f:event listener="#{loginBean.isConnected}" type="preRenderView" />
+   <h:head>
+   
+		<style type="text/css">
+		#parent_terrain {
+				width:1000px;
+				height:700px;
+				border: 1px solid black;
+				/*margin-left:50px;*/
+				
+				text-align: center;
+				margin: 0 auto;
+				
+  				perspective:700px;
+  				
+			}
+			
+			.panel_terrain {
+				width:600px;
+				height:700px;
+				/*margin-left:180px;*/
+				margin: 0 auto;
+				background:url("#{resource['img/terrain_vertical.jpg']}") 100% 0;
+				background-size: 600px 620px;
+    			background-repeat: no-repeat;
+				transform: rotateX(35deg);
+				
+				vertical-align: middle;
+				
+				margin-top: -3.75cm;
+			}
+			
+			.panel_ligne {
+			margin: 0 auto;
+				width:600px;
+			}
+			
+			.centerCell {
+     			text-align: center;
+     			width:100%;
+			}
+			
+			.parent_joueur {
+			width:150px;
+			margin: 0 auto;
+				perspective:700px;
+			
+			/*border-style:solid;
+    			border-width : 2px;
+    			border-color : silver;*/
+			}
+			
+			
+			#terrain {
+				width:600px;
+				height:700px;
+				margin-left:50px;
+				background:url("#{resource['img/terrain3.jpg']}") 100% 0;
+				background-size: 500px 700px;
+    			background-repeat: no-repeat;
+				transform: rotateX(45deg);
+				
+				
+				
+				
+			}
+			
+			
+
+scene3D div{
+  /* ... */
+  transform: rotateX(0deg);
+}
+#scene3D div:hover{
+  /* ... */
+  transform: rotateX(180deg);
+}
+
+
+
+
+.entete_col1 {
+	width: 20%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+
+.entete_col2 {
+	width: 55%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : bottom;
+}
+
+.entete_col3 {
+	width: 25%;
+	text-align: left;
+	vertical-align : middle;
+}
+
+.col_def {
+	width: 25%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align : middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	padding: 50px;
+	background: rgba(0,0,0,.2);
+}
+
+#modal {
+	/* basic */
+	background-color: #fff;
+	margin: 0 auto;
+	width:210px;
+	padding: 30px;
+	text-align: center;
+	/* border-radius */
+	border-radius: 12px;
+	color: white;
+	/* box-shadow */
+	-webkit-box-shadow: rgba(0,0,0,0.5) 0px 3px 10px, rgba(0,0,0,.75) 0 0 70px inset;
+	-moz-box-shadow: rgba(0,0,0,0.5) 0px 3px 10px, rgba(0,0,0,.75) 0 0 70px inset;
+	box-shadow: rgba(0,0,0,0.5) 0px 3px 10px, rgba(0,0,0,.75) 0 0 70px inset;
+	
+	background: #7d7e7d;
+	background: -moz-linear-gradient(top, #7d7e7d, #0e0e0e);
+	background: -webkit-linear-gradient(top, #7d7e7d, #0e0e0e);
+	background: -ms-linear-gradient(top, #7d7e7d, #0e0e0e);
+	background: -o-linear-gradient(top, #7d7e7d, #0e0e0e);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 );
+	background: linear-gradient(to bottom, #7d7e7d, #0e0e0e);
+	
+	border-top: 1px solid #666;
+	overflow: hidden;
+}
+
+#modal h1 {
+	text-align:left;
+	margin:0;
+	font-size:25px;
+	letter-spacing:-1px;
+	margin-bottom:4px;
+	text-shadow: 0 -1px 1px #000, 0 0px 5px rgba(0,0,0,.25);
+}
+
+#modal p {
+	margin-top: 7px 0 25px;
+	color: #ccc;
+	font-size:13px;
+	text-align:left;
+	text-shadow: 0 0px 5px rgba(0,0,0,.25), 0 -1px 1px #000;
+}
+
+.yes {
+	background:green;
+	display:block;
+	padding:15px 35px;
+	float:left;
+	color:white;
+	text-decoration:none;
+	
+	font-weight:bold;
+	text-shadow: 0 0 10px #000;
+	border-top: 1px solid rgb(200,250,100);
+	font-size:20px;
+	
+	-webkit-box-shadow: rgba(255,255,255,.3) 0 2px 1px,rgba(0,0,0,.3) 0 -2px 1px, rgba(0,0,0,0.5) 0px 3px 10px, rgba(0,50,0,.75) 0 0 40px inset;
+	-moz-box-shadow: rgba(255,255,255,.3) 0 2px 1px,rgba(0,0,0,.3) 0 -2px 1px, rgba(0,0,0,0.5) 0px 3px 10px, rgba(0,50,0,.75) 0 0 40px inset;
+	box-shadow: rgba(255,255,255,.3) 0 2px 1px,rgba(0,0,0,.3) 0 -2px 1px, rgba(0,0,0,0.5) 0px 3px 10px, rgba(0,50,0,.75) 0 0 40px inset;
+	
+	border-radius: 12px;
+	
+	background: #bfd255;
+	background: -webkit-linear-gradient(top, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%);
+	background: -moz-linear-gradient(top, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%);
+	background: -ms-linear-gradient(top, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%);
+	background: -o-linear-gradient(top, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 );
+	background: linear-gradient(to bottom, #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%);
+}
+
+.no {
+	background: red; 
+	display: block;
+	padding: 15px 35px;
+	float: right;
+	color: white;
+	text-decoration: none;
+	font-size: 20px;
+	border-top: 1px solid rgb(250,150,100);
+	font-weight: bold;
+	
+	-webkit-box-shadow: rgba(255,255,255,.3) 0 2px 1px,rgba(0,0,0,.3) 0 -2px 1px, rgba(0,0,0,0.5) 0px 3px 10px, rgba(100,0,0,.75) 0 0 40px inset;
+	-moz-box-shadow: rgba(255,255,255,.3) 0 2px 1px,rgba(0,0,0,.3) 0 -2px 1px, rgba(0,0,0,0.5) 0px 3px 10px, rgba(100,0,0,.75) 0 0 40px inset;
+	box-shadow: rgba(255,255,255,.3) 0 2px 1px,rgba(0,0,0,.3) 0 -2px 1px, rgba(0,0,0,0.5) 0px 3px 10px, rgba(100,0,0,.75) 0 0 40px inset;
+	
+	text-shadow: 0 0 10px #000;
+	border-radius: 12px;
+	
+	background: #f3c5bd;
+	background: -webkit-linear-gradient(top, #f3c5bd 0%, #e86c57 50%, #ea2803 51%, #ff6600 100%);
+	background: -moz-linear-gradient(top, #f3c5bd 0%, #e86c57 50%, #ea2803 51%, #ff6600 100%);
+	background: -ms-linear-gradient(top, #f3c5bd 0%, #e86c57 50%, #ea2803 51%, #ff6600 100%);
+	background: -o-linear-gradient(top, #f3c5bd 0%, #e86c57 50%, #ea2803 51%, #ff6600 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#ff6600',GradientType=0 );
+	background: linear-gradient(to bottom, #f3c5bd 0%, #e86c57 50%, #ea2803 51%, #ff6600 100%);
+}
+
+a:active {
+	position:relative;
+	top:3px;
+}
+
+</style>
+
+	
+	</h:head>
+	
+   <h:body>
+   
+
+<ui:composition template="template/layoutForm.xhtml">
+
+<ui:define name="title">Equipe User</ui:define>
+
+<ui:define name="content">
+
+	
+<rich:popupPanel id="popup_content" modal="true" autosized="false" resizeable="false">
+		<f:facet name="header">
+		<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}" style="font-size: 200%;">
+			<span class="sepV_c" style="margin-right: 35px;">
+				#{localeBean.language.arabic ? statJoueurBean.selectedJoueur.nomJ_ar : statJoueurBean.selectedJoueur.nomJ}
+			</span>
+		</div>
+      </f:facet>
+      
+      <f:facet name="controls">
+            <h:outputLink value="#" onclick="#{rich:component('popup_content')}.hide(); return false;"
+            styleClass="close-logo">
+            </h:outputLink>
+        </f:facet>
+        <h:panelGroup id="plg">
+        	<ui:include src="statJoueurPopupPanel.xhtml"></ui:include>
+        </h:panelGroup>
+</rich:popupPanel>
+
+<!-- ***************************************  listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  listJoueursChoix.xhtml  ******************************************** -->
+
+
+    
+<rich:popupPanel id="list_player_popup" modal="true" autosized="false" resizeable="false" width="487"
+   				height="500">
+	<f:facet name="header">
+		<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}" style="font-size: 200%;">
+			<span class="sepV_c" style="margin-right: 35px;">
+				<h:outputLabel id="list_player_popup_title"
+							value="#{i18n[equipeUserBean.position.label]}"
+							>
+						</h:outputLabel>
+			</span>
+		</div>
+      </f:facet>
+<f:facet name="controls">
+            <h:outputLink value="#" onclick="#{rich:component('list_player_popup')}.hide(); return false;"
+            styleClass="close-logo">
+            </h:outputLink>
+        </f:facet>
+        <h:form id="popup_player_content_form">
+        <h:panelGroup id="popup_player_content">
+	
+	<!--ui:include src="listJoueursChoix.xhtml"></ui:include-->
+	
+	<div class="col-sm-4 col-lg-4" style="width:437px" id="user-list">
+	
+               <rich:messages ajaxRendered="true" />
+            	
+            	<!--div class="alert alert-danger alert-dismissable alert-login">
+	
+            	</div--> 
+            	
+			<div class="row">
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}">
+				<span class="sepV_c">
+					
+					<h:outputLabel style="font-size: 18px;font-weight:bold"
+							value="#{i18n['message_equipe']}:"
+							>
+						</h:outputLabel>
+					
+					
+					<h:selectOneMenu id="chosen_equipe_chx" styleClass="form-control input-sm" value="#{equipeUserBean.equipeIdFilter}"
+					style="font-size: 14px;font-weight:bold">
+						<f:selectItem itemValue="0" itemLabel="" />
+						<f:selectItems value="#{appBean.mapEquipe[sessionBean.selectedChampionnat.id]}" 
+							var="p" itemValue="#{p.id}" itemLabel="#{localeBean.language.arabic ? p.libelle_ar : p.libelle}">
+						</f:selectItems>
+					 
+						<a4j:ajax event="change" listener="#{equipeUserBean.valueFilterChanged}" render="popup_player_content" 
+							execute="chosen_equipe_chx"/>
+					</h:selectOneMenu>
+				</span>
+				</div>
+				<div class="pull-#{localeBean.language.arabic ? 'left' : 'right'}">
+				<span class="sepV_c">
+				<h:outputLabel style="font-size: 18px;font-weight:bold"
+							value="#{i18n['filter_sort_by']}:"
+							>
+						</h:outputLabel>
+					
+					<h:selectOneMenu id="chosen_order_by_chx" styleClass="form-control input-sm" value="#{equipeUserBean.sortJBy}"
+					style="font-size: 14px;font-weight:bold">
+					<f:selectItem itemValue="1" itemLabel="#{i18n['message_pts_tot']}" />
+					<f:selectItem itemValue="2" itemLabel="#{i18n['message_nom']}" />
+					<f:selectItem itemValue="3" itemLabel="#{i18n['message_cout']}" />
+					<f:selectItem itemValue="4" itemLabel="#{i18n['message_equipe']}" />
+					<f:ajax event="change" listener="#{equipeUserBean.sortList}" 
+					execute="chosen_order_by_chx" render="popup_player_content" /> 
+					</h:selectOneMenu>
+				</span>
+				</div>
+				
+				
+			 </div>
+			 </div>
+			<ul class="list user_list" style="font-size: 18px;font-weight:bold">
+			
+				<ui:repeat value="#{equipeUserBean.listJoueurFilter}" var="u">
+				<li>
+					
+					<span class="#{localeBean.language.arabic ? 'pull-left' : 'pull-right'}">
+					
+					<!--a href="#" title="Accept"><i class="splashy-document_letter_okay"></i></a-->
+				
+						
+					<h:commandLink id="accept_icon_id_#{u.id}"
+					 			action="#{equipeUserBean.updateJoueur(u)}">
+							<i class="splashy-document_letter_okay"></i>
+							<f:ajax onerror="handleXhrError" onevent="oneventPopupList" render="panelGroup_solde_id #{equipeUserBean.joueurRenderId}"/>
+					</h:commandLink>
+					</span>
+					
+					<h:outputLabel  id="name_icon_id_#{u.id}" 
+							value="#{localeBean.language.arabic ? u.nomJ_ar : u.nomJ}"
+							>
+						</h:outputLabel><br/>
+						
+					<small class="s_color sl_email">#{localeBean.language.arabic ? u.labelEquipe_ar : u.labelEquipe}</small><br/>
+					<small class="s_color sl_email">#{i18n['message_cout']} : </small>
+					<span class="label label-success pull-center sl_status">#{u.cout}</span>
+				</li>
+				</ui:repeat>
+				
+				
+			</ul>
+       
+	</h:panelGroup>
+	</h:form>
+</rich:popupPanel>
+
+<!-- ***************************************  end listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  end listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  end listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  end listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  end listJoueursChoix.xhtml  ******************************************** -->
+<!-- ***************************************  end listJoueursChoix.xhtml  ******************************************** -->
+
+				
+
+	<div id="parent_terrain">
+	<!--div id="success_save_div_id" class="sticky-queue top-center">
+		<div class="sticky border-top-center st-success" id="92300" style="height: 17px; display: block;">
+			<span class="close st-close" rel="92300" title="Close">×</span>
+			<div class="sticky-note" rel="92300">Formation enregistrée avec succès.</div>
+		</div>
+	</div-->
+	
+	
+	
+	<h:panelGrid id="panelGrid_formation_id" columns="3"  width="100%" 
+	columnClasses="entete_col1,entete_col2,entete_col3">
+	
+	<h:panelGroup id="panelGroup_solde_id" align="left">
+			<ul class="ov_boxes">
+			<li>
+			<div class="ov_text" style="text-align: center;;color: #fff;background-color: #5cb85c;border-color: #4cae4c;">
+						<strong>#{i18n['message_score']}</strong>
+						<strong>#{equipeUserBean.equipeUser.soldeUserRestant}</strong>
+					</div>
+			
+			</li>
+			</ul>
+	</h:panelGroup>
+	
+	
+	<h:panelGroup id="div_formation_id" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-small bootstrap-switch-animate bootstrap-switch-on" 
+		style="width: 423px;">
+			<div class="bootstrap-switch-container" style="width: 428px; margin-left: 0px;">
+			<f:ajax render="form_terrain_id:terrain_id form_formation panelGroup_solde_id">
+				<h:form id="form_formation">
+					<ui:repeat value="#{appBean.formations}" var="var">
+						<h:commandLink styleClass="#{equipeUserBean.equipeUser.formation==var ? 'bootstrap-switch-handle-on bootstrap-switch-primary' : 'bootstrap-switch-handle-off bootstrap-switch-default'}" 
+							style="width: 140px;" value="#{var.label}"
+							action="#{equipeUserBean.changeFormation}">
+							<f:setPropertyActionListener target="#{equipeUserBean.equipeUser.formation}" value="#{var}" />
+							
+						</h:commandLink>
+					</ui:repeat>
+				</h:form>
+			</f:ajax>
+				
+		
+			</div>
+		</h:panelGroup>
+		
+		<h:panelGroup align="right">
+		<f:ajax render="form_terrain_id:terrain_id form_formation panelGroup_solde_id">
+		<h:form id="form_save_cancel" style="align:right">
+			<ul class="dshb_icoSav iconSav_right">
+			<li><h:commandLink style="background-image: url('#{resource['img/gCons/save.png']}');color: #fff;background-color: #5cb85c;border-color: #4cae4c;"
+			action="#{equipeUserBean.enregistrerFormation}">
+				#{i18n['button.save']}
+				<f:ajax onerror="handleXhrError" onevent="showAlertOK" render="message_error_save"/>
+				<!--f:validator validatorId="formationValidator" >
+				<f:attribute name="param" value="myparam" /> 
+				</f:validator-->
+			</h:commandLink></li>
+			
+			<li><h:commandLink style="background-image: url('#{resource['img/gCons/delete-item.png']}');color: #fff;background-color: #5cb85c;border-color: #4cae4c;"
+			action="#{equipeUserBean.initEquipe}">
+				#{i18n['button.cancel']}
+			</h:commandLink></li>
+			</ul>
+			
+		</h:form>
+		</f:ajax>
+		</h:panelGroup>
+		
+		</h:panelGrid>
+	
+		
+		
+		
+
+		
+		
+		
+		<div id="panel_terrain_div_id" class="panel_terrain">
+		
+		
+		
+		<h:form id="form_terrain_id" width="100%" style="height : 85%;">
+		
+	<h:panelGrid id="terrain_id" width="100%" style="height : 100%;" columns="1" >
+
+
+
+						
+		<!-- Gardien 
+		<i class="splashy-remove"></i>
+		<i class="splashy-add"></i>
+					<i class="splashy-pencil"></i>
+		-->
+		<h:panelGrid columns="1" styleClass="panel_ligne" >
+		
+		<utils:joueurPanelEdit id="panel_group_gardien" playerObj="#{equipeUserBean.equipeUser.gardien}"
+					playerPos="#{appBean.listPositionJoueur[0]}" playerPosNum="#{1}"></utils:joueurPanelEdit>
+
+				
+		</h:panelGrid>
+		
+		<!-- Defenseur -->
+		<h:panelGrid columns="#{equipeUserBean.equipeUser.formation.nbD}" styleClass="panel_ligne" columnClasses="col_def,col_def,col_def,col_def" 
+		>
+				<utils:joueurPanelEdit id="panel_group_defenseur_1" playerObj="#{equipeUserBean.equipeUser.defenseur1}"
+					playerPos="#{appBean.listPositionJoueur[1]}" playerPosNum="#{2}"></utils:joueurPanelEdit>
+				<utils:joueurPanelEdit id="panel_group_defenseur_2" playerObj="#{equipeUserBean.equipeUser.defenseur2}"
+					playerPos="#{appBean.listPositionJoueur[1]}" playerPosNum="#{3}"></utils:joueurPanelEdit>
+				<utils:joueurPanelEdit id="panel_group_defenseur_3" playerObj="#{equipeUserBean.equipeUser.defenseur3}"
+					playerPos="#{appBean.listPositionJoueur[1]}" playerPosNum="#{4}"></utils:joueurPanelEdit>
+				<utils:joueurPanelEdit id="panel_group_defenseur_4" playerObj="#{equipeUserBean.equipeUser.defenseur4}"
+					playerPos="#{appBean.listPositionJoueur[1]}" playerPosNum="#{5}"
+					playerRendered="#{equipeUserBean.equipeUser.formation.nbD == 4}"></utils:joueurPanelEdit>
+				
+				
+		</h:panelGrid>
+		
+		<!-- Milieu -->
+		<h:panelGrid columns="#{equipeUserBean.equipeUser.formation.nbM}" styleClass="panel_ligne">
+			
+			<utils:joueurPanelEdit id="panel_group_milieu_1" playerObj="#{equipeUserBean.equipeUser.milieu1}"
+					playerPos="#{appBean.listPositionJoueur[2]}" playerPosNum="#{6}"></utils:joueurPanelEdit>
+				<utils:joueurPanelEdit id="panel_group_milieu_2" playerObj="#{equipeUserBean.equipeUser.milieu2}"
+					playerPos="#{appBean.listPositionJoueur[2]}" playerPosNum="#{7}"></utils:joueurPanelEdit>
+				<utils:joueurPanelEdit id="panel_group_milieu_3" playerObj="#{equipeUserBean.equipeUser.milieu3}"
+					playerPos="#{appBean.listPositionJoueur[2]}" playerPosNum="#{8}"></utils:joueurPanelEdit>
+				<utils:joueurPanelEdit id="panel_group_milieu_4" playerObj="#{equipeUserBean.equipeUser.milieu4}"
+					playerPos="#{appBean.listPositionJoueur[2]}" playerPosNum="#{9}"
+					playerRendered="#{equipeUserBean.equipeUser.formation.nbM == 4}"></utils:joueurPanelEdit>
+					
+
+		</h:panelGrid>
+		
+		<!-- Attaquant -->
+		<h:panelGrid columns="#{equipeUserBean.equipeUser.formation.nbA}" styleClass="panel_ligne">
+		
+			<utils:joueurPanelEdit id="panel_group_att_1" playerObj="#{equipeUserBean.equipeUser.att1}"
+					playerPos="#{appBean.listPositionJoueur[3]}" playerPosNum="#{10}"></utils:joueurPanelEdit>
+				
+			<utils:joueurPanelEdit id="panel_group_att_2" playerObj="#{equipeUserBean.equipeUser.att2}"
+					playerPos="#{appBean.listPositionJoueur[3]}" playerPosNum="#{11}"></utils:joueurPanelEdit>
+				
+			<utils:joueurPanelEdit id="panel_group_att_3" playerObj="#{equipeUserBean.equipeUser.att3}"
+					playerPos="#{appBean.listPositionJoueur[3]}" playerPosNum="#{12}"
+					playerRendered="#{equipeUserBean.equipeUser.formation.nbA == 3}"></utils:joueurPanelEdit>
+
+				
+				
+				
+				
+				
+			
+				
+		</h:panelGrid>
+		
+	</h:panelGrid>
+	</h:form>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+   		$(function() {
+   			$( "#dialog" ).dialog({
+   				autoOpen: false,
+   				show: {effect: 'scale', duration: 950},
+   				hide: {effect: 'scale', duration: 950},
+   				width: 640,
+   				height: (screen.height*2)/3,
+   				modal: true,
+   				resizable: false,
+   				
+   			});
+   			
+   			$( "#list_player_popup" ).dialog({
+   				autoOpen: false,
+   				title: "#{i18n[equipeUserBean.position.label]}",
+   				show: {effect: 'scale', duration: 950},
+   				hide: {effect: 'scale', duration: 950},
+   				width: 487,
+   				height:500,
+   				modal: true,
+   				resizable: false,
+   				
+   			});
+		 }
+   		
+   		
+   		);
+   		
+   		
+   	    
+   	 function showPlayerPop(data){
+	        if(data.status == "success") {
+	        	$( "#list_player_popup" ).dialog( "open" );
+	        }
+	    }
+   	function hidePlayerPop(data){
+        if(data.status == "success") {
+        	$( "#list_player_popup" ).dialog( "close" );
+        	
+        	var xmlDoc=data.responseXML;
+ 		 	var x=xmlDoc.getElementsByTagName("error-message");
+ 		 	if (x==null || x.length == 0) {
+ 		 		
+ 		 	} else {
+ 		 		var settings =
+ 				{
+ 				'speed'			:	'slow',	 // animations: fast, slow, or integer
+ 				'duplicates'	:	false,  // true or false
+ 				'autoclose'		:	50000  // integer or false
+ 				};
+ 		 		
+ 		 		$.sticky(x[0].childNodes[0].nodeValue, 'st-error', settings);
+ 		 	}
+        	
+        }
+    }
+   	
+   	function hidePlayerPop_2(data){
+   		alert('start');
+   			var xmlDoc=data.responseXML;
+		 	var x=xmlDoc.getElementsByTagName("error-message");
+		 	if (x==null || x.length == 0) {
+		 		
+		 	} else {
+		 		
+		 		alert(x[0].childNodes[0].nodeValue);
+		 	}
+   	}
+   	
+   	function showAlertOK(data) {
+        if(data.status == "success") {
+        	//$('#success_save_div_id').sticky();
+        	var xmlDoc=data.responseXML;
+ 		 	var x=xmlDoc.getElementsByTagName("error-message");
+ 		 	if (x==null || x.length == 0) {
+ 		 		$.sticky("#{i18n['msg_formation_ok']}");
+ 		 	} else {
+ 		 		var settings =
+ 				{
+ 				'speed'			:	'slow',	 // animations: fast, slow, or integer
+ 				'duplicates'	:	false,  // true or false
+ 				'autoclose'		:	50000  // integer or false
+ 				};
+ 		 		
+ 		 		$.sticky(x[0].childNodes[0].nodeValue, 'st-error', settings);
+ 		 	}
+        }
+    }
+   	
+   	function oneventPopupList(data) {
+   		if(data.status == "success") {
+   			var xmlDoc=data.responseXML;
+ 		 	var x=xmlDoc.getElementsByTagName("error-message");
+ 		 	if (x==null || x.length == 0) {
+ 		 		#{rich:component('list_player_popup')}.hide();
+ 		 	} else {
+ 		 		alert(x[0].childNodes[0].nodeValue);
+ 		 	}
+   		}
+   	}
+   	
+   	function handleXhrError(xhr) {}
+
+   	
+	</script>
+
+
+</ui:define>
+    </ui:composition>
+    
+    
+    </h:body>
+    </f:view>
+</html>

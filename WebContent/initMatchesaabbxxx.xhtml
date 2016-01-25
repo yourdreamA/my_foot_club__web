@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html dir="ltr" 
+ xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<f:view>
+    <h:head>
+    </h:head>
+
+<h:body>
+<ui:composition template="template/layoutForm.xhtml">
+
+			<ui:define name="content">
+
+<h:form>
+
+<h:panelGrid columns="1">
+	
+	<h:selectOneMenu id="chosen_championnat" styleClass="form-control input-sm" value="#{adminMatchBean.idSelectedChampionnat}">
+					<f:selectItem itemValue="0" itemLabel="" />
+					<f:selectItems value="#{appBean.listChampionnat}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+					<f:ajax event="change" listener="#{adminMatchBean.init()}" 
+					execute="chosen_championnat" render="panel_journee_current panel_add_match dataTable_update_match_id" /> 
+	</h:selectOneMenu>
+		
+	<h:panelGrid columns="4" id="panel_journee_current">
+
+		<h:outputLabel>Journee : </h:outputLabel>
+		<h:inputText value="#{adminMatchBean.currentJournee}"></h:inputText>
+		<h:commandButton value="set current" action="#{adminMatchBean.updateCurrentJournee}"></h:commandButton>
+    	<h:messages for="adminMatch_form"  />
+    	
+   
+
+
+	</h:panelGrid>
+	
+	<h:panelGrid columns="7" id="panel_add_match">
+		<h:outputLabel>Equipe 1 : </h:outputLabel>
+    	<h:selectOneMenu id="chosen_equipe_1" value="#{adminMatchBean.idEq1}">
+				<f:selectItem itemValue="0" itemLabel="" />
+				<f:selectItems value="#{appBean.mapEquipe[adminMatchBean.idSelectedChampionnat]}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+		</h:selectOneMenu>
+    	
+    	<h:outputLabel>Equipe 2 : </h:outputLabel>
+    	<h:selectOneMenu id="chosen_equipe_2" value="#{adminMatchBean.idEq2}">
+				<f:selectItem itemValue="0" itemLabel="" />
+				<f:selectItems value="#{appBean.mapEquipe[adminMatchBean.idSelectedChampionnat]}" var="p" itemValue="#{p.id}" itemLabel="#{p.libelle}"></f:selectItems>
+		</h:selectOneMenu>
+		
+		
+    	<h:inputText id="dp2"  value="#{adminMatchBean.dateMatch}"
+							p:type="date">
+				<f:convertDateTime pattern="yyyy-MM-dd" />
+		</h:inputText>
+		
+		<h:inputText id="hr2"  value="#{adminMatchBean.heureMatch}"
+							p:type="time">
+				<f:convertDateTime pattern="kk:mm" />
+		</h:inputText>
+		
+		<h:commandButton value="add match" action="#{adminMatchBean.addMatch}"></h:commandButton>
+	</h:panelGrid>
+	
+	<h:dataTable id="dataTable_update_match_id" 
+							value="#{adminMatchBean.listMatch}" var="m"
+							styleClass="table table-striped table-bordered dTableR dataTable">
+							
+							<h:column>
+								<f:facet name="header">id match</f:facet>
+								<h:outputLabel>#{m.id}</h:outputLabel>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Date</f:facet>
+    							
+    							<h:outputLabel value="#{m.dateM}" >
+              						<f:convertDateTime pattern="EEEE, d MMMMMM yyyy kk:mm" />
+ 								</h:outputLabel>
+  							</h:column>
+  							
+  							<h:column>
+								<f:facet name="header">Eq 1</f:facet>
+								<h:outputLabel>#{m.eq1.libelle}</h:outputLabel>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Eq 2</f:facet>
+								<h:outputLabel>#{m.eq2.libelle}</h:outputLabel>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Nbr but 1</f:facet>
+								<h:inputText value="#{m.nbrButEq1}"></h:inputText>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Nbr but 2</f:facet>
+								<h:inputText value="#{m.nbrButEq2}"></h:inputText>
+							</h:column>
+							
+							<h:column>
+								<f:facet name="header">Actions</f:facet>
+								<h:commandButton value="Valider resultat" action="#{adminMatchBean.modifierMatch(m)}"></h:commandButton>
+							</h:column>
+  	</h:dataTable>
+
+
+
+</h:panelGrid>
+
+ </h:form>
+
+
+</ui:define>
+</ui:composition>
+</h:body>
+
+
+
+</f:view>
+
+</html>

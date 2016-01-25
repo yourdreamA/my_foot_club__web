@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   
+    
+	
+
+	<h:head>
+		<style type="text/css">
+.colPosition {
+	width: 20%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.colEquipe {
+	width: 40%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.colDateN {
+	width: 30%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.colCout {
+	width: 10%;
+	margin: 0 auto;
+	text-align: center;
+	vertical-align: middle;
+}
+</style>
+	</h:head>
+	<h:body>
+
+<div class="row search_page">
+ 
+    <div class="col-sm-12 col-md-12">
+    
+    	<h3 class="heading">#{localeBean.language.arabic ? statJoueurBean.selectedJoueur.nomJ_ar : statJoueurBean.selectedJoueur.nomJ}</h3>
+    	
+		
+		<!-- ENTETE -->
+		
+		
+		<div class="well clearfix">
+			
+			<h:panelGrid width="100%" columns="4" columnClasses="colPosition, colEquipe, colDateN, colCout">
+				<h:outputLabel>#{i18n['message_position']}</h:outputLabel>
+				<h:outputLabel>#{i18n['message_equipe']}</h:outputLabel>
+				<h:outputLabel>#{i18n['stat_j_dateNaissance']}</h:outputLabel>
+				<h:outputLabel>#{i18n['message_cout']}</h:outputLabel>
+				
+				<h:outputLabel>#{i18n[statJoueurBean.selectedJoueur.labelPosition]}</h:outputLabel>
+				<h:outputLabel rendered="#{localeBean.language.arabic}">#{statJoueurBean.selectedJoueur.labelEquipe_ar}</h:outputLabel>
+				<h:outputLabel rendered="#{!localeBean.language.arabic}">#{statJoueurBean.selectedJoueur.labelEquipe}</h:outputLabel>
+				<h:outputLabel value="#{statJoueurBean.selectedJoueur.dateNaissance}" >
+              		<f:convertDateTime pattern="dd.MM.yyyy" />
+ 				</h:outputLabel>
+				<h:outputLabel>#{statJoueurBean.selectedJoueur.cout}</h:outputLabel>
+			</h:panelGrid>
+			
+			 </div>
+        <!-- end ENTETE -->
+			
+			
+			
+			<h:dataTable id="dataTable_joueur_popup_id" value="#{statJoueurBean.selectedJoueur.stats}" var="u" 
+styleClass="table table-striped table-bordered dTableR dataTable" >
+	
+  	
+  <h:column>
+    <f:facet name="header">
+    	<h:outputLabel value="#{i18n['stat_j_journee_rc']}"
+    					p:data-hint="#{i18n['stat_j_journee']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    </f:facet>
+    		<h:panelGroup border="1">
+    			#{u.journee.numero}
+    		</h:panelGroup>
+    <f:facet name="footer">
+    #{i18n['stat_j_total']}
+    </f:facet>
+  </h:column>
+  
+  
+  <h:column>
+    <f:facet name="header">
+    	<h:outputLabel value="#{i18n['stat_j_minutes_played_rc']}"
+    					p:data-hint="#{i18n['stat_j_minutes_played']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    </f:facet>
+    
+    	<h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below">
+    			#{u.nbrMinuteJoue}
+    		</h:panelGrid>
+    		<h:panelGrid>
+    			<strong>#{u.ptMinutesJoue}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+
+    			<strong>#{statJoueurBean.total.nbrMinuteJoue}</strong>
+
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_goal_scor_rc']}"
+    					p:data-hint="#{i18n['stat_j_goal_scor']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    	<h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrBut > 0}">
+    			#{u.nbrBut}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrBut == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrBut > 0}">
+    			<strong>#{u.nbrButPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+    			<strong>#{statJoueurBean.total.nbrBut}</strong>
+
+    	</f:facet>
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_assist_rc']}"
+    					p:data-hint="#{i18n['stat_j_assist']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrAssist > 0}">
+    			#{u.nbrAssist}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrAssist == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrAssist > 0}">
+    			<strong>#{u.nbrAssistPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    
+    <f:facet name="footer">
+
+    			<strong>#{statJoueurBean.total.nbrAssist}</strong>
+
+    	</f:facet>
+    	
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_shot_in_goal_rc']}"
+    					p:data-hint="#{i18n['stat_j_shot_in_goal']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrShotInG > 0}">
+    			#{u.nbrShotInG}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrShotInG == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrShotInG > 0}">
+    			<strong>#{u.nbrShotInGPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    
+    <f:facet name="footer">
+    			<strong>#{statJoueurBean.total.nbrShotInG}</strong>
+
+    	</f:facet>
+    	
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_shot_pen_rc']}"
+    					p:data-hint="#{i18n['stat_j_shot_pen']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenalty > 0}">
+    			#{u.nbrPenalty}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenalty == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrPenalty > 0}">
+    			<strong>#{u.nbrPenaltyPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+ 
+    			<strong>#{statJoueurBean.total.nbrPenalty}</strong>
+
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_miss_pen_rc']}"
+    					p:data-hint="#{i18n['stat_j_miss_pen']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenaltyRate > 0}">
+    			#{u.nbrPenaltyRate}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrPenaltyRate == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrPenaltyRate > 0}">
+    			<strong>#{u.nbrPenaltyRatePt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+    			<strong>#{statJoueurBean.total.nbrPenaltyRate}</strong>
+
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_repouss_tir_rc']}"
+    					p:data-hint="#{i18n['stat_j_repouss_tir']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSave > 0}">
+    			#{u.nbrSave}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSave == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrSave > 0}">
+    			<strong>#{u.nbrSave}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+
+    			<strong>#{statJoueurBean.total.nbrSave}</strong>
+
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_repouss_pen_rc']}"
+    					p:data-hint="#{i18n['stat_j_repouss_pen']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSavePenalty > 0}">
+    			#{u.nbrSavePenalty}
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrSavePenalty == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrSavePenalty > 0}">
+    			<strong>#{u.nbrSavePenaltyPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+    		<strong>#{statJoueurBean.total.nbrSavePenalty}</strong>
+
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_goal_a_rc']}"
+    					p:data-hint="#{i18n['stat_j_goal_a']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrButRecu > 0}">
+    			#{u.nbrButRecu}
+    		</h:panelGrid>
+
+    		<h:panelGrid rendered="#{u.nbrButRecu > 0}">
+    			<strong>#{u.nbrButRecuPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+    		<strong>#{statJoueurBean.total.nbrButRecu}</strong>
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_clean_sheet_rc']}"
+    					p:data-hint="#{i18n['stat_j_clean_sheet']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrButRecu == 0}">
+    			<i class="splashy-check"></i>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.nbrButRecu > 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.nbrButRecu == 0}">
+    			<strong>#{u.cleanSheet}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    <f:facet name="footer">
+    	
+    	<strong>#{statJoueurBean.total.cleanSheetS}</strong>
+
+    </f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_card_y_rc']}"
+    					p:data-hint="#{i18n['stat_j_card_y']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonJ == 1}">
+    			<h:graphicImage library="icons" name="yellow_card.png" width="16px" height="16px"></h:graphicImage>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonJ == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.cartonJ == 1}">
+    			<strong>#{u.cartonJPt}</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+    		<h:panelGrid columns="1" width="100%">
+    			<strong>#{statJoueurBean.total.cartonJ}</strong>
+    	</h:panelGrid>
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_card_r_rc']}"
+    					p:data-hint="#{i18n['stat_j_card_r']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <h:panelGrid columns="1" width="100%">
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonR == 1}">
+    			<h:graphicImage library="icons" name="red_card.png" width="16px" height="16px"></h:graphicImage>
+    		</h:panelGrid>
+    		<h:panelGrid columns="1" border="1" width="100%" frame="below" rendered="#{u.cartonR == 0}">
+    		-
+    		</h:panelGrid>
+    		<h:panelGrid rendered="#{u.cartonR == 1}">
+    			<strong>-2</strong>
+    		</h:panelGrid>
+    	</h:panelGrid>
+    	
+    	<f:facet name="footer">
+    		<h:panelGrid columns="1" width="100%">
+    		<strong>#{statJoueurBean.total.cartonR}</strong>
+    	</h:panelGrid>
+    	</f:facet>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header"><h:outputLabel value="#{i18n['stat_j_total_point_rc']}"
+    					p:data-hint="#{i18n['stat_j_total_point']}"
+    					styleClass="hint--bottom"></h:outputLabel>
+    	</f:facet>
+    <strong>#{u.totalP}</strong>
+    
+    <f:facet name="footer">
+    	<strong>#{statJoueurBean.total.totalP}</strong>
+    	</f:facet>
+  </h:column>
+  
+</h:dataTable>
+			
+       
+  
+
+
+
+
+					</div></div>
+
+    </h:body>
+</html>

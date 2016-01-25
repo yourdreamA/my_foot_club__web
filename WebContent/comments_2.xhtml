@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}"
+	dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<f:view>
+
+	<h:body>
+		<ui:composition template="template/layoutForm.xhtml">
+			<ui:define name="title">Joueurs</ui:define>
+
+			<ui:define name="content">
+
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+						<div class="chat_box">
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div class="chat_content">
+										<div class="chat_heading clearfix">
+											<div class="pull-right">
+												<i class="glyphicon"></i>
+											</div>
+										</div>
+
+										<div class="msg_window">
+
+
+											<div class="chat_msg clearfix msg_clone"
+												style="display: none">
+												<div class="chat_msg_heading">
+													<span class="chat_msg_date"></span><span
+														class="chat_user_name"></span>
+												</div>
+												<div class="chat_msg_body"></div>
+											</div>
+
+
+											<ui:repeat value="#{commentBean.listMessages}" var="var"
+												varStatus="status">
+
+												<div class="chat_msg clearfix">
+													<div class="chat_msg_heading">
+														<span class="chat_msg_date"> <h:outputLabel
+																value="#{var.dateM}">
+																<f:convertDateTime pattern="EEEE, d MMMMMM yyyy kk:mm"
+																	locale="#{localeBean.language.locale}" />
+															</h:outputLabel>
+														</span> 
+														
+														<span class="chat_user_name">#{var.user.username}</span>
+													</div>
+													<div class="chat_msg_body">#{var.message}</div>
+												</div>
+
+											</ui:repeat>
+
+
+										</div>
+
+
+										<div class="chat_editor_box">
+										<h:form id="comment_form">
+											<div class="alert alert-danger alert-dismissable alert-login" style="#{not empty facesContext.maximumSeverity ? '' : 'display : none'}">
+                								<strong><h:messages for="comment_form"  /></strong>
+                								<h:outputLabel styleClass="error" rendered="#{not b_message_user.valid}">
+														<h:message id="m1" for="message_user" />
+													</h:outputLabel>
+            								</div>
+												<div class="cleditorMain"
+													style="width: 100%; height: 120px;">
+													
+
+													<h:inputTextarea id="message_user" value="#{commentBean.messageUser}" cols="30" rows="3" class="form-control"
+														style="width: 798px; height: 93px;"
+														binding="#{b_message_user}"
+														required="true"
+										 				requiredMessage="#{i18n['error_comment_requiredMessage']}">
+
+													</h:inputTextarea>
+													
+													
+
+
+													
+												</div>
+
+
+
+												<div class="btn-group send_btns">
+													<h:commandLink action="#{commentBean.addMessage()}" styleClass="btn send_msg btn-default btn-xs">
+            											#{i18n['button.send']}
+            									</h:commandLink>
+												</div>
+												
+												</h:form>
+										</div>
+
+
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-4"></div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+
+
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

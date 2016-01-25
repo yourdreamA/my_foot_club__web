@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   
+   
+   <!-- http://gebo-admin-3.tzdthemes.com/user_static.html -->
+   
+   
+   
+   
+   <h:body>
+<ui:composition template="template/layoutForm.xhtml">
+<ui:define name="title">Example form</ui:define>
+
+<ui:define name="content">
+<div class="row">
+ 
+    <div class="col-sm-6 col-md-6">
+		<h3 class="heading">My profile</h3>
+		<h:form class="form_validation_reg">
+			<div class="formSep">
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+						<label>#{i18n['message_username']}</label>
+						<h:inputText id="usertname"
+										styleClass="form-control"
+										 p:type="text"
+										 value="#{loginBean.connectedUser.login.username}"
+										 disabled="true"
+										></h:inputText>
+					</div>
+				</div>
+			</div>
+			<div class="formSep">
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+						<label>Email</label>
+						<h:inputText id="mail" 
+										styleClass="form-control"
+										 p:type="email"
+										 value="#{loginBean.connectedUser.mail}"
+										 disabled="true"
+										></h:inputText>
+					</div>
+				</div>
+			</div>
+			
+			<div class="formSep">
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+						<label>Full name</label>
+						<h:inputText id="pwd1" binding="#{b_pwd1}"
+										styleClass="form-control"
+										 value="#{loginBean.connectedUser.fullname}" disabled="true"
+										></h:inputText>
+						<h:outputLabel class="error" style="display: block;" rendered="#{not b_pwd1.valid}">
+							<h:message id="mp1" for="pwd1" />
+						</h:outputLabel>
+					</div>
+				</div>
+			</div>
+			
+			<div class="formSep">
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+						<label>City</label>
+						<h:inputText id="cityId"
+										styleClass="form-control"
+										 value="#{loginBean.connectedUser.ville}" disabled="true"
+										></h:inputText>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<label>Zone</label>
+						<h:inputText id="zoneId"
+										styleClass="form-control"
+										 value="#{loginBean.connectedUser.zone}" disabled="true"
+										></h:inputText>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			<div class="formSep">
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+						<label>Profession</label>
+						<h:inputText id="professionId"
+										styleClass="form-control"
+										 value="#{loginBean.connectedUser.profession}" disabled="true"
+										></h:inputText>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			<div class="formSep">
+				<div class="row">
+				
+				<div class="col-sm-6 col-md-6">
+					<label>Date de naissance</label>
+				<div class="input-group date" id="dp2" data-date-format="dd/mm/yyyy">
+					<h:inputText id="dp2" styleClass="form-control" value="#{loginBean.connectedUser.dateNaissance}"
+							p:type="date" disabled="true">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+					<span class="input-group-addon"><i class="splashy-calendar_day"></i></span>
+				</div>
+				<!--span class="help-block">As component</span-->
+				</div>
+				</div>
+			</div>
+			
+
+				<div class="formSep">
+					<label><span class="error_placement">Gender</span></label>
+					<br/>
+					
+					<label for="sexe_m_id" class="radio-inline"></label>
+						<h:selectOneRadio value="#{loginBean.connectedUser.sexe}" styleClass="myRadioGroup" disabled="true">
+						
+   							<f:selectItem id="sexe_m_id" itemValue="m" itemLabel="Male  "/>
+   							
+   							
+   							<f:selectItem id="sexe_f_id" itemValue="f" itemLabel="Female" />
+						</h:selectOneRadio>
+						
+				</div>
+		</h:form>
+		</div>
+    </div>
+    
+    </ui:define>
+    </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   
+   
+	
+   <h:body>
+   <h:panelGroup id="popup_Joueur_choix" styleClass="row" layout="block">
+<div class="col-sm-4 col-lg-4" style="width:437px" id="user-list">
+			<h3 class="heading">#{i18n[lstJrChxBean.position.label]}</h3>
+			<div class="well clearfix">
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}">
+			<h:form styleClass="input-group input-group-sm">
+				<span class="sepV_c">
+					#{i18n['message_equipe']}:
+					<h:selectOneMenu id="chosen_equipe_chx" styleClass="form-control input-sm" value="#{lstJrChxBean.equipeIdFilter}">
+					<f:selectItem itemValue="0" itemLabel="" />
+					<f:selectItems value="#{appBean.mapEquipe[sessionBean.selectedChampionnat.id]}" var="p" itemValue="#{p.id}" itemLabel="#{localeBean.language.arabic ? p.libelle_ar : p.libelle}"></f:selectItems>
+					<f:ajax event="change" listener="#{lstJrChxBean.filterList}" 
+					execute="chosen_equipe_chx" render="popup_Joueur_choix" /> 
+					</h:selectOneMenu>
+				</span>
+				
+				</h:form>
+			</div>
+			</div>
+			<div class="row">
+				<!--div class="col-lg-12">
+					<div class="input-group input-group-sm sepH_b">
+						<span class="input-group-addon">
+							<i class="glyphicon glyphicon-user"></i>
+						</span>
+						<span class="twitter-typeahead" style="position: relative; display: inline-block;">
+							<input class="tt-hint" type="text" autocomplete="off" spellcheck="off" disabled="" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);"/>
+							<input class="user-list-search search form-control input-sm tt-query" placeholder="Search user" type="text" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;"/>
+							<span style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;">
+						</span>
+						<span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
+					</div>
+					<ul class="nav nav-pills line_sep">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Sort by <b class="caret"></b></a>
+							<ul class="dropdown-menu sort-by">
+								<li><a href="javascript:void(0)" class="sort" data-sort="sl_name">by name</a></li>
+								<li><a href="javascript:void(0)" class="sort" data-sort="sl_status">by status</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Show <b class="caret"></b></a>
+							<ul class="dropdown-menu filter">
+								<li class="active"><a href="javascript:void(0)" id="filter-none">All</a></li>
+								<li class=""><a href="javascript:void(0)" id="filter-online">Online</a></li>
+								<li class=""><a href="javascript:void(0)" id="filter-offline">Offline</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div-->
+				
+			</div>
+			<ul class="list user_list">
+			
+				<ui:repeat value="#{lstJrChxBean.listJoueur}" var="u">
+				<!--ui:repeat value="#{lstJrChxBean.listJoueur}" var="u"-->
+				<li>
+					
+					<span class="pull-right">
+					<a href="#" title="Accept"><i class="splashy-document_letter_okay"></i></a>
+						</span>
+						
+					<a href="#" class="sl_name">#{localeBean.language.arabic ? u.nomJ_ar : u.nomJ}</a><br/>
+					<small class="s_color sl_email">#{localeBean.language.arabic ? u.labelEquipe_ar : u.labelEquipe}</small><br/>
+					<small class="s_color sl_email">#{i18n['message_cout']} : </small>
+					<span class="label label-success pull-center sl_status">#{u.cout}</span>
+				</li>
+				</ui:repeat>
+				
+				
+				
+			</ul>
+			
+			
+			
+			
+			
+		
+			
+			
+        </div>
+        </h:panelGroup>
+        </h:body>
+        </html>
+        

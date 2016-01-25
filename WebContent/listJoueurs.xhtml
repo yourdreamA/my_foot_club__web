@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+   xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+   <f:view>
+   <h:head>
+		<style type="text/css">
+   .colHeader {
+		text-align: center;
+		vertical-align : middle;
+	}
+	.col1 {
+		font-weight: bold;font-size: 120%;
+		/*color : white;
+		background:url("#{resource['img/br2.png']}") 100% 0;
+		background-size: 60px 62px;
+    			background-repeat: no-repeat;
+		background-repeat: no-repeat;*/
+	}
+	.col2 {
+	}
+	.col3 {
+	}
+	.col4 {
+	}
+	.col5 {
+	}
+	.col6 {
+	}
+	
+
+
+
+	
+
+
+</style>
+	</h:head>
+   <h:body>
+<ui:composition template="template/layoutForm.xhtml">
+<ui:define name="title">#{i18n['joueur_title']}</ui:define>
+
+<ui:define name="content">
+
+
+<rich:popupPanel id="popup_content" modal="true" autosized="false">
+		<f:facet name="header">
+		<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}" style="font-size: 200%;">
+			<span class="sepV_c" style="margin-right: 35px;">
+				#{localeBean.language.arabic ? statJoueurBean.selectedJoueur.nomJ_ar : statJoueurBean.selectedJoueur.nomJ}
+			</span>
+		</div>
+      </f:facet>
+      
+      <f:facet name="controls">
+            <h:outputLink value="#" onclick="#{rich:component('popup_content')}.hide(); return false;"
+            styleClass="close-logo">
+            </h:outputLink>
+        </f:facet>
+        <h:panelGroup id="plg">
+        	<ui:include src="statJoueurPopupPanel.xhtml"></ui:include>
+        </h:panelGroup>
+	
+</rich:popupPanel>
+
+
+
+<div class="row search_page">
+ 
+    <div class="col-sm-12 col-md-12">
+    
+    	<h3 class="heading"><small>#{i18n['filter_header']}</small> #{i18n['joueur_title']}</h3>
+    	
+		
+		<!-- FILTER -->
+		
+		
+		<div class="well clearfix">
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'} col-sm-3 col-md-3">
+			<f:ajax render="form_popup_j dt_a_info_id form_pagination">
+			<h:form styleClass="input-group input-group-sm">
+				<h:inputText id="usernameFilter_id"  styleClass="search_query form-control input-sm"
+							p:placeholder="#{i18n['filter_search']}">
+			
+				</h:inputText>
+				<span class="input-group-btn">
+					<button type="submit" jsf:action="#{listJoueurBean.doSearchByUserName}"
+                         class="btn btn-default">
+                        	<i class="glyphicon glyphicon-search"></i>
+                    </button>
+				</span>
+			</h:form>
+			</f:ajax>
+			</div>
+			
+			
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}">
+			<h:form styleClass="input-group input-group-sm">
+				<span class="sepV_c">
+					#{i18n['filter_sort_by']}:
+					<h:selectOneMenu id="chosen_order_by" styleClass="form-control input-sm" value="#{listJoueurBean.filter.sortBy}">
+					<f:selectItem itemValue="totalPoint" itemLabel="#{i18n['message_pts_tot']}" />
+					<f:selectItem itemValue="pointJournee" itemLabel="#{i18n['message_pts_journee']}" />
+					<f:ajax event="change" listener="#{listJoueurBean.doSearch(0)}" 
+					execute="chosen_order_by" render="form_popup_j dt_a_info_id form_pagination" /> 
+					</h:selectOneMenu>
+				</span>
+				
+				</h:form>
+			</div>
+			
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}">
+			<h:form styleClass="input-group input-group-sm">
+				<span class="sepV_c">
+					#{i18n['message_position']}:
+					<h:selectOneMenu id="chosen_position" styleClass="form-control input-sm" value="#{listJoueurBean.filter.position}">
+					<f:selectItem itemValue="0" itemLabel="" />
+					<f:selectItems value="#{appBean.listPositionJoueur}" var="p" itemValue="#{p.valeur}" itemLabel="#{i18n[p.label]}"></f:selectItems>
+					<f:ajax event="change" listener="#{listJoueurBean.doSearch(0)}" 
+					execute="chosen_position" render="form_popup_j dt_a_info_id form_pagination" /> 
+					</h:selectOneMenu>
+				</span>
+				
+				</h:form>
+			</div>
+			
+			
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'}">
+			<h:form styleClass="input-group input-group-sm">
+				<span class="sepV_c">
+					#{i18n['message_equipe']}:
+					<h:selectOneMenu id="chosen_equipe" styleClass="form-control input-sm" value="#{listJoueurBean.filter.idEquipe}">
+					<f:selectItem itemValue="0" itemLabel="" />
+					<f:selectItems value="#{appBean.mapEquipe[sessionBean.selectedChampionnat.id]}" var="p" itemValue="#{p.id}" itemLabel="#{localeBean.language.arabic ? p.libelle_ar : p.libelle}"></f:selectItems>
+					<f:ajax event="change" listener="#{listJoueurBean.doSearch(0)}" 
+					execute="chosen_equipe" render="form_popup_j dt_a_info_id form_pagination" /> 
+					</h:selectOneMenu>
+				</span>
+				
+				</h:form>
+			</div>
+        </div>
+        <!-- end FILTER -->
+        
+<h:form id="form_popup_j" width="100%">
+<h:dataTable id="dataTable_user_id" value="#{listJoueurBean.listJoueur}" var="u" columnClasses="col1, col2, col3, col4,col5, col6"
+styleClass="table table-striped table-bordered dTableR dataTable" style="font-weight: bold;font-size: 150%;" headerClass="colHeader">
+	<!--h:column>
+    	<f:facet name="header">#{i18n['message_rang']}</f:facet>
+    	#{u.rangTotal}
+  		</h:column-->
+  	<h:column>
+    	<f:facet name="header"></f:facet>
+    	#{u.numero}
+  	</h:column>
+  <h:column>
+  
+    <f:facet name="header">#{i18n['message_nom']}</f:facet>
+		
+		<a4j:commandButton value="#{localeBean.language.arabic ? u.nomJ_ar : u.nomJ}"
+		styleClass="btn btn-block" style="font-weight: bold;font-size: 150%;"
+		action="#{statJoueurBean.initIdJoueur(u.id)}" 
+		oncomplete="#{rich:component('popup_content')}.show(event, {'height':screen.height*2/3,'width':(screen.width-50)});"
+		render="popup_content">
+			
+		</a4j:commandButton>
+	
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_equipe']}</f:facet>
+   	#{localeBean.language.arabic ? u.labelEquipe_ar : u.labelEquipe}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_position']}</f:facet>
+    #{i18n[u.labelPosition]}
+  </h:column>
+  
+   <h:column>
+    <f:facet name="header">#{i18n['message_cout']}</f:facet>
+    #{u.cout}
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_pts_journee']}</f:facet>
+    #{u.pointJournee}
+  </h:column>
+  
+   <!--h:column>
+    <f:facet name="header">#{i18n['message_pts_periode']}</f:facet>
+    #{u.pointPeriodeAct}
+  </h:column-->
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_pts_tot']}</f:facet>
+    #{u.totalPoint}
+  </h:column>
+  
+</h:dataTable>
+</h:form>
+	<!-- Paginantion -->
+						<div class="row">
+							<div class="col-sm-5">
+								<div class="dataTables_info" id="dt_a_info">
+								<h:outputFormat id="dt_a_info_id" value="#{i18n['pagination_infos']}">
+									<f:param value="#{listJoueurBean.filter.pagination.debut}" />
+									<f:param value="#{listJoueurBean.filter.pagination.fin}" />
+									<f:param value="#{listJoueurBean.filter.pagination.totalResultat}" />
+								</h:outputFormat></div>
+							</div>
+							<div class="col-sm-7">
+								<div class="dataTables_paginate paging_bootstrap_alt">
+								<f:ajax render="form_popup_j dt_a_info_id form_pagination">
+								<h:form id="form_pagination">
+									<ul class="pagination pagination-sm">
+									
+										<li class="first #{listJoueurBean.filter.pagination.numeroPage le 0 ? 'disabled' : ''}">
+											<h:commandLink action="#{listJoueurBean.doSearch('f')}" 
+													disabled="#{listJoueurBean.filter.pagination.numeroPage le 0}">
+												&lt;&lt; #{i18n['pagination_first']}
+											</h:commandLink>
+										</li>
+										<li class="prev #{listJoueurBean.filter.pagination.numeroPage le 0 ? 'disabled' : ''}">
+											<h:commandLink action="#{listJoueurBean.doSearch('p')}"
+												disabled="#{listJoueurBean.filter.pagination.numeroPage le 0}">
+												&lt; #{i18n['pagination_previous']}
+											</h:commandLink>
+										</li>
+										<!-- page number -->
+										<c:forEach var="p" begin="1" end="#{listJoueurBean.filter.pagination.totalPage}">
+											<li class="#{listJoueurBean.filter.pagination.numeroPage + 1 == p ? 'active':''}">
+												<h:commandLink action="#{listJoueurBean.doSearch(p-1)}"
+													disabled="#{listJoueurBean.filter.pagination.numeroPage + 1 == p}">
+													#{p}
+												</h:commandLink>
+											</li>
+										</c:forEach>
+										
+										
+										<li class="next #{listJoueurBean.filter.pagination.numeroPage + 1 ge listJoueurBean.filter.pagination.totalPage ? 'disabled' : ''}">
+											<h:commandLink action="#{listJoueurBean.doSearch('n')}"
+												disabled="#{listJoueurBean.filter.pagination.numeroPage + 1 ge listJoueurBean.filter.pagination.totalPage}">
+												#{i18n['pagination_next']} &gt;
+											</h:commandLink>
+										</li>
+										<li class="last #{listJoueurBean.filter.pagination.numeroPage + 1 ge listJoueurBean.filter.pagination.totalPage ? 'disabled' : ''}">
+											<h:commandLink action="#{listJoueurBean.doSearch('l')}"
+													disabled="#{listJoueurBean.filter.pagination.numeroPage + 1 ge listJoueurBean.filter.pagination.totalPage}">
+												#{i18n['pagination_last']} &gt;&gt;
+											</h:commandLink>
+										</li>
+									</ul>
+								</h:form>
+								</f:ajax>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div></div>
+					
+					
+					
+
+</ui:define>
+    </ui:composition>
+    </h:body>
+    </f:view>
+</html>

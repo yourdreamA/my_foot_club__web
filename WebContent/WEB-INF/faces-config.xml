@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config version="2.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	<application>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>en</supported-locale>
+			<supported-locale>fr</supported-locale>
+			<supported-locale>es</supported-locale>
+			<supported-locale>ar</supported-locale>
+			<supported-locale>de</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>com.abd.mfc.i18n.messages</base-name>
+			<var>i18n</var>
+		</resource-bundle>
+		
+		<resource-bundle>
+			<base-name>com.abd.mfc.i18n.eq.eqEspagne</base-name>
+			<var>j_es</var>
+		</resource-bundle>
+		
+		<!-- Spring -->
+		<el-resolver>
+    		    org.springframework.web.jsf.el.SpringBeanFacesELResolver
+		</el-resolver>
+		
+	</application>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>loginError</from-outcome>
+			<to-view-id>/loginError.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>equipeUser</from-outcome>
+			<to-view-id>/equipeUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>listMatch</from-outcome>
+			<to-view-id>/listMatches.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>listJoueurs.jjsf</display-name>
+		<from-view-id>/listJoueurs.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>statJoueur</from-outcome>
+			<to-view-id>/statJoueur.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>addUser</from-outcome>
+			<to-view-id>/registrationUserWizard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/listUser.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>statUserPublic</from-outcome>
+			<to-view-id>/statUserPublic.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>statUser</from-outcome>
+			<to-view-id>/statUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

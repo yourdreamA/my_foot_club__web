@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="en" class="login_page" xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <f:view>
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login Page</title>
+    
+        
+        
+       
+		
+    </h:head>
+    <h:body>
+    	<!-- theme color-->
+		<h:outputStylesheet library="css" name="blue.css"></h:outputStylesheet>
+		<!-- main styles -->
+		<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+		<!-- Bootstrap framework -->
+		<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css"></h:outputStylesheet>
+		<!-- tooltip -->
+		<h:outputStylesheet library="qtip2" name="jquery.qtip.min.css"></h:outputStylesheet>
+			
+			
+			
+		<div class="login_box">
+			
+			<h:form id="login_form" >
+				<div class="top_b">Sign in to Gebo Admin</div>    
+				<div class="alert alert-info alert-login">
+					<h:messages for="login_form" />
+				</div>
+				<div class="cnt_b">
+					<div class="form-group #{not b_username.valid ? 'f_error' : ''}">
+						<div class="input-group">
+							<span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
+							<h:inputText id="username" binding="#{b_username}"
+										styleClass="form-control input-sm"
+										 p:type="text" p:placeholder="Username"
+										 value="#{loginBean.login.username}"
+										 required="true"
+										 requiredMessage="Username is required"
+										></h:inputText>
+							
+						</div>
+						<h:outputLabel styleClass="error" rendered="#{not b_username.valid}">
+							<h:message id="m1" for="username" />
+						</h:outputLabel>
+						
+					</div>
+					<div class="form-group #{not b_pwd.valid ? 'f_error' : ''}">
+						<div class="input-group">
+							<span class="input-group-addon input-sm"><i class="glyphicon glyphicon-lock"></i></span>
+							<h:inputSecret id="password" binding="#{b_pwd}"
+										styleClass="form-control input-sm"
+										 p:placeholder="Password" 
+										value="#{loginBean.login.pwd}"
+										required="true"
+										 requiredMessage="Password is required"
+										></h:inputSecret>
+						</div>
+						<h:outputLabel styleClass="error" rendered="#{not b_pwd.valid}">
+							<h:message id="m2" for="password" />
+						</h:outputLabel>
+					</div>
+					<div class="form-group">
+						<label class="checkbox-inline"><input type="checkbox" /> Remember me</label>
+					</div>
+				</div>
+				<div class="btm_b clearfix">
+					<h:commandButton id="button" value="Sign In" 
+					 action="#{loginBean.doLogin}" styleClass="btn btn-default btn-sm pull-right"/>
+					<span class="link_reg">
+						<h:commandLink action="#{navigationBean.redirectToInfo}" value="Not registered? Sign up here"/>
+					</span>
+				</div>  
+			</h:form>
+			
+
+			
+			<div class="links_b links_btm clearfix">
+				<span class="linkform"><a href="#pass_form">Forgot password?</a></span>
+				<span class="linkform" style="display:none">Never mind, <a href="#login_form">send me back to the sign-in screen</a></span>
+			</div>
+			
+		</div>
+		 
+        
+		
+			
+    </h:body>
+    </f:view>
+</html>

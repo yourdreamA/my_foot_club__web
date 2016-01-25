@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+<div class="row">
+	<h:form>
+		<div class="col-sm-12">
+			<ul class="dshb_icoNav clearfix">
+				<li> <h:commandLink action="/listUser.xhtml?faces-redirect=true" style="background-image: url('#{resource['img/gCons/multi-agents.png']}')">
+					 #{i18n['menu.user']}</h:commandLink>
+				</li>
+				
+				<li>
+					<h:commandLink action="/equipeUser.xhtml?faces-redirect=true" style="background-image: url('#{resource['img/gCons/terrain_42.png']}')">
+						#{i18n['menu.monequipe']}
+					</h:commandLink>
+				</li>
+				
+				<li>
+					<h:commandLink action="/statUser.xhtml?faces-redirect=true" style="background-image: url('#{resource['img/gCons/calendar.png']}')">
+						#{i18n['menu.stat']}
+					</h:commandLink>
+				</li>
+				
+				<li>
+					<h:commandLink action="/listJoueurs.xhtml?faces-redirect=true" style="background-image: url('#{resource['img/gCons/joueur_36.png']}')">
+						#{i18n['menu.joueur']}
+					</h:commandLink>
+				</li>
+				
+				<li>
+					<h:commandLink action="/rules.xhtml?faces-redirect=true" style="background-image: url('#{resource['img/gCons/rules.png']}');	background-size: 32px 32px;">
+						#{i18n['menu.rules']}
+					</h:commandLink>
+				</li>
+				
+				<li>
+					<h:commandLink action="/comments.xhtml?faces-redirect=true" style="background-image: url('#{resource['img/gCons/chat-.png']}');	background-size: 32px 32px;">
+						#{i18n['menu.comments']}
+					</h:commandLink>
+				</li>
+				
+				
+				
+				<!--li><a href="javascript:void(0)" style="background-image: url(img/gCons/van.png)"><span class="label label-success">$2851</span> Delivery</a></li>
+				<li><a href="javascript:void(0)" style="background-image: url(img/gCons/pie-chart.png)">Charts</a></li>
+				<li><a href="javascript:void(0)" style="background-image: url(img/gCons/edit.png)">Add New Article</a></li>
+				<li><a href="javascript:void(0)" style="background-image: url(img/gCons/add-item.png)"> Add New Page</a></li>
+				<li><a href="javascript:void(0)" style="background-image: url(img/gCons/chat-.png)"><span class="label label-danger">26</span> Comments</a></li-->
+			</ul>
+		</div>
+		</h:form>
+	</div>
+	</h:body>
+</html>

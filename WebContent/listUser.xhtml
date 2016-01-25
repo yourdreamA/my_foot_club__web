@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   xmlns:c="http://java.sun.com/jsp/jstl/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
+   xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+   <h:body>
+<ui:composition template="template/layoutForm.xhtml">
+<ui:define name="title">#{i18n['user_title']}</ui:define>
+
+<ui:define name="content">
+
+<div class="row search_page">
+ 
+    <div class="col-sm-12 col-md-12">
+    
+    	<h3 class="heading"><small>#{i18n['filter_header']}</small> #{i18n['user_title']}</h3>
+    	
+		
+		<!-- FILTER -->
+		<div class="well clearfix">
+			<div class="pull-#{localeBean.language.arabic ? 'right' : 'left'} col-sm-3 col-md-3">
+			<f:ajax render="dataTable_user_id dt_a_info_id form_pagination">
+			<h:form styleClass="input-group input-group-sm">
+				<h:inputText id="usernameFilter_id"  styleClass="search_query form-control input-sm"
+							p:placeholder="#{i18n['filter_search']}">
+			
+				</h:inputText>
+				<span class="input-group-btn">
+					<button type="submit" jsf:action="#{listUserBean.doSearchByUserName}"
+                         class="btn btn-default">
+                        	<i class="glyphicon glyphicon-search"></i>
+                    </button>
+				</span>
+			</h:form>
+			</f:ajax>
+			</div>
+			
+			
+			
+			
+			<div class="pull-right">
+			<h:form styleClass="input-group input-group-sm">
+				<span class="sepV_c">
+					 #{i18n['filter_sort_by']}:
+					<h:selectOneMenu id="chosen_a" styleClass="form-control input-sm" value="#{listUserBean.filter.sortBy}">
+			
+					<f:selectItem itemValue="pointUserS" itemLabel="#{i18n['message_pts_tot']}" />
+					<!--f:selectItem itemValue="pointUserP" itemLabel="#{i18n['message_pts_periode']}" /-->
+					<f:selectItem itemValue="pointUserJ" itemLabel="#{i18n['message_pts_journee']}" />
+					<f:ajax event="change" listener="#{listUserBean.sortByListener}" 
+					execute="chosen_a" render="dataTable_user_id dt_a_info_id form_pagination" /> 
+					</h:selectOneMenu>
+				</span>
+				<!--span class="sepV_c">
+					View:
+					<select class="form-control input-sm">
+						<option>12</option>
+						<option>25</option>
+						<option>50</option>
+					</select>
+				</span>
+				<span class="result_view">
+					<a href="javascript:void(0)" class="box_trgr sepV_b active"><i class="glyphicon glyphicon-th-large"></i></a>
+					<a href="javascript:void(0)" class="list_trgr"><i class="glyphicon glyphicon-align-justify"></i></a>
+				</span-->
+				</h:form>
+			</div>
+        </div>
+        <!-- end FILTER -->
+        
+
+<h:dataTable id="dataTable_user_id" value="#{listUserBean.listUser}" var="u" styleClass="table table-striped table-bordered dTableR dataTable">
+	<h:column>
+    	<f:facet name="header">#{i18n['message_rang']}</f:facet>
+    	#{u.rangTotal}
+  		</h:column>
+  <h:column>
+    <f:facet name="header">#{i18n['message_username']}</f:facet>
+   		<h:link value="#{u.nomEquipe}" outcome="statUserPublic" includeViewParams="true">
+			<f:param name="id_u" value="#{u.id}"></f:param>
+		</h:link>
+  </h:column>
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_fullname']}</f:facet>
+    #{u.name}
+  </h:column>
+  <h:column>
+    <f:facet name="header">#{i18n['message_pts_journee']}</f:facet>
+    #{u.nbrPointJourneAct}
+  </h:column>
+  
+   <!--h:column>
+    <f:facet name="header">#{i18n['message_pts_periode']}</f:facet>
+    #{u.nbrPointPeriodeAct}
+  </h:column-->
+  
+  <h:column>
+    <f:facet name="header">#{i18n['message_pts_tot']}</f:facet>
+    #{u.nbrPointTotal}
+  </h:column>
+</h:dataTable>
+
+	<!-- Paginantion -->
+						<div class="row">
+							<div class="col-sm-5">
+								<div class="dataTables_info" id="dt_a_info">
+								<h:outputFormat id="dt_a_info_id" value="#{i18n['pagination_infos']}">
+									<f:param value="#{listUserBean.filter.pagination.debut}" />
+									<f:param value="#{listUserBean.filter.pagination.fin}" />
+									<f:param value="#{listUserBean.filter.pagination.totalResultat}" />
+								</h:outputFormat></div>
+							</div>
+							<div class="col-sm-7">
+								<div class="dataTables_paginate paging_bootstrap_alt">
+								<f:ajax render="dataTable_user_id dt_a_info_id form_pagination">
+								<h:form id="form_pagination">
+									<ul class="pagination pagination-sm">
+									
+										<li class="first #{listUserBean.filter.pagination.numeroPage le 0 ? 'disabled' : ''}">
+											<h:commandLink action="#{listUserBean.doSearch('f')}" 
+													disabled="#{listUserBean.filter.pagination.numeroPage le 0}">
+												&lt;&lt; #{i18n['pagination_first']}
+											</h:commandLink>
+										</li>
+										<li class="prev #{listUserBean.filter.pagination.numeroPage le 0 ? 'disabled' : ''}">
+											<h:commandLink action="#{listUserBean.doSearch('p')}"
+												disabled="#{listUserBean.filter.pagination.numeroPage le 0}">
+												&lt; #{i18n['pagination_previous']}
+											</h:commandLink>
+										</li>
+										<!-- page number -->
+										<c:forEach var="p" begin="1" end="#{listUserBean.filter.pagination.totalPage}">
+											<li class="#{listUserBean.filter.pagination.numeroPage + 1 == p ? 'active':''}">
+												<h:commandLink action="#{listUserBean.doSearch(p-1)}"
+													disabled="#{listUserBean.filter.pagination.numeroPage + 1 == p}">
+													#{p}
+												</h:commandLink>
+											</li>
+										</c:forEach>
+										
+										
+										<li class="next #{listUserBean.filter.pagination.numeroPage + 1 ge listUserBean.filter.pagination.totalPage ? 'disabled' : ''}">
+											<h:commandLink action="#{listUserBean.doSearch('n')}"
+												disabled="#{listUserBean.filter.pagination.numeroPage + 1 ge listUserBean.filter.pagination.totalPage}">
+												#{i18n['pagination_next']} &gt;
+											</h:commandLink>
+										</li>
+										<li class="last #{listUserBean.filter.pagination.numeroPage + 1 ge listUserBean.filter.pagination.totalPage ? 'disabled' : ''}">
+											<h:commandLink action="#{listUserBean.doSearch('l')}"
+													disabled="#{listUserBean.filter.pagination.numeroPage + 1 ge listUserBean.filter.pagination.totalPage}">
+												#{i18n['pagination_last']} &gt;&gt;
+											</h:commandLink>
+										</li>
+									</ul>
+								</h:form>
+								</f:ajax>
+								</div>
+							</div>
+						</div>
+
+
+
+					</div></div>
+
+</ui:define>
+    </ui:composition>
+    </h:body>
+</html>

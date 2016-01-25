@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+ xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+<div id="jCrumbs" class="breadCrumb module">
+    <div style="overflow:hidden; position:relative; width: 1282px;">
+    <div>
+    <h:form>
+    <ul style="width: 5006px;">
+        <!--li class="first">
+            <a href="#"><i class="glyphicon glyphicon-home"></i></a>
+        </li-->
+        
+        
+        <ui:repeat value="#{appBean.listChampionnat}" var="var" varStatus="status">
+        	
+        	<li style="background: none;display: #{sessionBean.selectedChampionnat.id==var.id ? 'none':'block'};#{localeBean.language.arabic ? 'float:right' : ''}">
+            <span style="width: 200px;font-size: 20px">
+            <h:commandLink action="#{sessionBean.leagueChanged(var)}">
+            <h:graphicImage library="ch_icons" name="#{var.logo}" alt="" styleClass="user_avatar" width="40" height="40"></h:graphicImage>
+            	#{i18n[var.libelle]}
+            </h:commandLink></span>
+        	
+        	<h:panelGroup styleClass="chevronOverlay" layout="block"
+        		rendered="#{localeBean.language.arabic and status.first}"></h:panelGroup>
+        	<div class="chevronOverlay" style="display: #{localeBean.language.arabic ? (status.first ? 'none' : 'block') : (status.last ? 'none' : 'block')};"></div>
+        	</li>
+        	
+        	
+        	<li class="last" style="background: none;display: #{sessionBean.selectedChampionnat.id==var.id ? 'block' : 'none'};#{localeBean.language.arabic ? 'float:right' : ''}">
+        	<span style="width: 200px;font-size: 25px">
+        		<h:graphicImage library="ch_icons" name="#{var.logo}" alt="" styleClass="user_avatar" width="40" height="40"></h:graphicImage>
+            	#{i18n[var.libelle]}</span>
+            	<div class="chevronOverlay" style="display: #{localeBean.language.arabic ? (status.first ? 'none' : 'block') : (status.last ? 'none' : 'block')};"></div>
+        	</li>
+        </ui:repeat>
+        
+        
+      </ul>
+      
+      </h:form>
+        
+        
+        
+        <!--li style="background: none;">
+            <span style="width: 200px;"><a href="#">
+            <img src="#{resource['ch_icons/champ_espagne.png']}" alt="" class="user_avatar" width="40" height="40"/>Spanish LFP Primera División
+            </a></span>
+        <div class="chevronOverlay" style="display: block;"></div></li>
+        <li style="background: none;">
+            <span style="width: 200px;"><a href="#"><img src="#{resource['ch_icons/champ_anglet.png']}" alt="" class="user_avatar" width="40" height="40"/>Barclays Premier League</a></span>
+        <div class="chevronOverlay" style="display: block;"></div></li>
+        <li style="background: none;">
+            <span style="width: 200px;"><a href="#">
+            <img src="#{resource['ch_icons/champ_italie.png']}" alt="" class="user_avatar" width="40" height="40"/>Italian Serie A</a></span>
+        <div class="chevronOverlay" style="display: block;"></div></li>
+        <li style="background: none;">
+            <span style="width: 200px;"><a href="#">
+            <img src="#{resource['ch_icons/champ_allemagne.png']}" alt="" class="user_avatar" width="40" height="40"/>German Bundesliga</a></span>
+        <div class="chevronOverlay" style="display: block;"></div></li>
+        <li class="last" style="background: none;">
+            Telescope 3735SX 
+        </li-->
+    </div></div>
+</div>
+<!--div class="breadCrumb_roulant">
+<p align="center"><font color="#0000ff" size="4"></font>
+<marquee dir="rtl" 
+style="BORDER-LEFT-COLOR: #0066ff; BORDER-BOTTOM-COLOR: #0066ff; BORDER-TOP-STYLE: ridge; BORDER-TOP-COLOR: #0066ff; BORDER-RIGHT-STYLE: ridge; BORDER-LEFT-STYLE: ridge; HEIGHT: 54px; BORDER-RIGHT-COLOR: #0066ff; BORDER-BOTTOM-STYLE: ridge; tahoma: 150%;" 
+scrollamount="6" scrolldelay="10" direction="right" height="54" bgcolor="#e9e9e9" width="1282">
+<font size="6">#{i18n['text.roulant1']}</font>
+<font size="6">#{i18n['text.roulant2']}</font>
+
+<span style="width: 200px;font-size: 6">
+      <h:graphicImage library="ch_icons" name="champ_anglet.png" alt="" width="40" height="40"></h:graphicImage>	
+</span>
+<font size="6">#{i18n['ch.angleterre']} : </font>
+<font size="4" color="red"> 1- #{appBean.listUsersEng[0].nomEquipe} (#{appBean.listUsersEng[0].nbrPointJourneAct} #{i18n['text.roulant.point']}) / </font>
+<font size="4" color="green"> 2- #{appBean.listUsersEng[1].nomEquipe} (#{appBean.listUsersEng[1].nbrPointJourneAct} #{i18n['text.roulant.point']}) /</font>
+<font size="4" color="pink"> 3- #{appBean.listUsersEng[2].nomEquipe} (#{appBean.listUsersEng[2].nbrPointJourneAct} #{i18n['text.roulant.point']})</font>
+
+
+<span style="width: 200px;font-size: 6;">
+      <h:graphicImage library="ch_icons" name="champ_espagne.png" alt="" width="40" height="40"></h:graphicImage>	
+</span>
+<font size="6">#{i18n['ch.espagne']} : </font>
+<font size="4" color="red"> 1- #{appBean.listUsersEsp[0].nomEquipe} (#{appBean.listUsersEsp[0].nbrPointJourneAct} #{i18n['text.roulant.point']}) / </font>
+<font size="4" color="green"> 2- #{appBean.listUsersEsp[1].nomEquipe} (#{appBean.listUsersEsp[1].nbrPointJourneAct} #{i18n['text.roulant.point']}) /</font>
+<font size="4" color="pink"> 3- #{appBean.listUsersEsp[2].nomEquipe} (#{appBean.listUsersEsp[2].nbrPointJourneAct} #{i18n['text.roulant.point']})</font>
+
+
+
+</marquee>
+</p>
+</div-->
+</h:body>
+</html>

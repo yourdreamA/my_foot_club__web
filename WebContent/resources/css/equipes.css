@@ -1,0 +1,592 @@
+			/*   Default    */
+			.joueur {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			
+			.joueur:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			/*  ------------------------------------------------------------ premier league ----------------------------------   */
+			.joueur_1 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_1.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_1:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_2 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_2.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_2:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_3 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_3.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_3:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_4 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_4.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_4:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_5 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_5.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_5:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_6 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_6.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_6:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_7 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_7.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_7:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			
+			.joueur_8 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_8.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_8:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_9 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_9.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_9:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_10 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_10.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_10:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_11 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_11.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_11:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_12 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_12.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_12:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_13 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_13.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_13:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_14 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_14.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_14:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_15 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_15.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_15:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_16 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_16.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_16:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_17 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_17.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_17:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_18 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_18.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_18:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_19 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_19.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_19:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_20 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_20.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_20:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			/*  ------------------------------------------------------------- la liga ------------------------------------   */
+			
+			.joueur_31 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_31.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_31:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_32 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_32.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_32:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_33 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_33.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_33:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_34 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_34.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_34:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_35 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_35:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_36 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_36:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_37 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_37:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_38 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_38:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_39 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_39.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_39:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_40 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_40:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_41 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_41:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_42 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_42:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_43 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_43.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_43:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_44 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_44.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_44:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_45 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_45.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_45:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_46 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_46:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_47 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_47:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_48 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_48:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_49 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt-blank.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_49:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_50 {
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_50.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			.joueur_50:hover{
+				cursor: hand;
+				transform: translateZ(100px);
+			}
+			
+			
+			/*  ------------------------------------------------ new/add -----------------------------------------   */
+			.joueur_to_add {
+				position: relative;
+				margin: 0 auto;
+				width:60px;
+				height:70px;
+				background:url("#{resource['shirts/shirt_0.png']}") 100% 0;
+				background-size: 50px 70px;
+    			background-repeat: no-repeat;
+			}
+			
+			.joueur_to_add:hover{
+				cursor: hand;
+    			cursor: pointer;
+    			opacity: .9;
+				transform: translateZ(100px);
+			}
+			
+			.joueur_to_add_link {
+    			position: absolute;
+    			display:block;
+    			width: 100%;
+    			height: 100%;
+    			top: 0;
+    			left: 0;
+    			text-decoration: none; /* No underlines on the link */
+    			z-index: 10; /* Places the link above everything else in the div */
+    			background-color: #FFF; /* Fix to make div clickable in IE */
+    			opacity: 0; /* Fix to make div clickable in IE */
+    			filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+			}
+			
+			.name_joueur {
+				background-color: rgba(0, 0, 0, 0.64)!important;
+				color : white!important;
+				padding: 10px 16px!important;
+  				font-size: 18px!important;
+  				line-height: 1.3333333!important;
+  				background-image: none!important;
+			}
+			
+			
+			
+			/*  ------------------------------------------------ Popup -----------------------------------------   */
+				.close-logo {
+    background:url("#{resource['icons/close.jpg']}") 100% 0;
+	background-size: 20px 20px;
+    background-repeat: no-repeat;
+    display:block;
+    height:20px;
+    width:20px;
+    
+}

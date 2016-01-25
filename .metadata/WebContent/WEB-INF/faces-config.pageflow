@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14225287638430" configfile="/my_foot_club__web/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="listJoueurs.jjsf" x="252" y="36" id="pf14242530649680" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf14242530649681" path="/listJoueurs.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="statJoueur.xhtml" x="492" y="36" id="pf14242530649682" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf14242530649681" path="/statJoueur.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="216" y="249" id="pf14244386459210" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf14244386459211 pf14259138450620 pf14259767109530 pf14259777384372 pf14278183785000 pf14279845554840" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="equipeUser.xhtml" x="680" y="348" id="pf14244386459212" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14244386459211" path="/equipeUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="696" y="249" id="pf14259138450621" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14259138450620" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="listMatches.xhtml" x="672" y="144" id="pf14259767109531" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14259767109530" path="/listMatches.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="registrationUserWizard.xhtml" x="419" y="418" id="pf14259777384373" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf14259777384372" path="/registrationUserWizard.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="loginError.xhtml" id="pf14278183785001" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14278183785000" path="/loginError.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="statUser.xhtml" id="pf14279845554841" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf14279845554840" path="/statUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="listUser.xhtml" id="pf14296278095780" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf14296278095781" path="/listUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="statUserPublic.xhtml" id="pf14296278095782" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf14296278095781" path="/statUserPublic.xhtml"/>
+  <links id="pf14242530649681" target="pf14242530649682" source="pf14242530649680" outcome="statJoueur" redirect="true"/>
+  <links id="pf14244386459211" target="pf14244386459212" source="pf14244386459210" outcome="equipeUser" redirect="true"/>
+  <links id="pf14259138450620" target="pf14259138450621" source="pf14244386459210" outcome="login"/>
+  <links id="pf14259767109530" target="pf14259767109531" source="pf14244386459210" outcome="listMatch" redirect="true"/>
+  <links id="pf14259777384372" target="pf14259777384373" source="pf14244386459210" outcome="addUser" redirect="true"/>
+  <links id="pf14278183785000" target="pf14278183785001" source="pf14244386459210" outcome="loginError" redirect="true"/>
+  <links id="pf14279845554840" target="pf14279845554841" source="pf14244386459210" outcome="statUser" redirect="true"/>
+  <links id="pf14296278095781" target="pf14296278095782" source="pf14296278095780" outcome="statUserPublic" redirect="true"/>
+</pageflow:Pageflow>

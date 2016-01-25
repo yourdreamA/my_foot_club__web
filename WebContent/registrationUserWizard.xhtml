@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html lang="#{localeBean.language.locale}" dir="#{localeBean.language.arabic ? 'rtl' : 'ltr'}" 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	<f:view>
+	<h:head>
+		<script type="text/javascript">
+		
+		function navigateToTab(selTabNum) {
+			var selTab = document.getElementById("validate_wizard-title-" + selTabNum);
+			var selWiz = document.getElementById("validate_wizard-step-" + selTabNum);
+			
+			var tab1 = document.getElementById("validate_wizard-title-0");
+			var tab2 = document.getElementById("validate_wizard-title-1");
+			var tab3 = document.getElementById("validate_wizard-title-2");
+			
+			var wiz1 = document.getElementById("validate_wizard-step-0");
+			var wiz2 = document.getElementById("validate_wizard-step-1");
+			var wiz3 = document.getElementById("validate_wizard-step-2");
+			
+			/*if ($('#validate_wizard-title-0').hasClass('current-step')) {
+				alert('jquery ok');
+			}*/
+			
+			if (selTab.classList.contains('current-step')) {
+			} else {
+				tab1.classList.remove('current-step');
+				tab2.classList.remove('current-step');
+				tab3.classList.remove('current-step');
+				
+				wiz1.style.display = 'none';
+				wiz2.style.display = 'none';
+				wiz3.style.display = 'none';
+				
+				selTab.classList.add('current-step');
+				selWiz.style.display = 'block';
+			}
+		}
+		
+		/*function validateForm() {
+			var _mail = document.getElementById("mail");
+			if (_mail.validity.valid == 'false')
+		    {
+				
+				navigateToTab('0');
+				document.getElementById("m_error_mail").style.display = 'block';
+		    }
+		}*/
+	</script>
+	</h:head>
+
+	<h:body>
+		<ui:composition template="template/layoutForm.xhtml">
+			<ui:define name="title">#{i18n['register_user_title']}</ui:define>
+
+			<ui:define name="content">
+
+				<div class="row">
+
+					<div class="col-sm-12 col-md-12">
+						<h3 class="heading">#{i18n['register_user_head_title']}</h3>
+						<div class="row">
+						
+						<ul id="validate_wizard-titles" class="stepy-titles clearfix">
+							<li id="validate_wizard-title-0" onclick="navigateToTab('0')"
+							class="#{not b_username.valid || not b_pwd1.valid || not b_mail.valid ? 'error-image' : ''} current-step">
+								<div>#{i18n['register_user_personal_info']}</div>
+								<!--span>Lorem ipsum dolor…</span-->
+								<span class="stepNb">1</span>
+							</li>
+							
+							<li id="validate_wizard-title-1" class="" onclick="navigateToTab('1')">
+								<div>#{i18n['register_user_contact_info']}</div>
+								<!--span>Lorem ipsum dolor…</span-->
+								<span class="stepNb">2</span>
+							</li>
+							
+							<li id="validate_wizard-title-2" class="" onclick="navigateToTab('2')">
+								<div>#{i18n['register_user_additional_info']}</div>
+								<!--span>Lorem ipsum dolor…</span-->
+								<span class="stepNb">3</span>
+							</li>
+						</ul>
+
+
+							
+							<!-- ____________________________START FORM -->
+
+				<h:form id="validate_wizard" class="stepy-wizzard form-horizontal" dir="rtl">
+                    <fieldset title="#{i18n['register_user_personal_info']}" class="step" id="validate_wizard-step-0" style="display: block;">
+                        <legend class="hide">Lorem ipsum dolor…</legend>
+                        <div  class="formSep form-group">
+                            <label for="v_username" class="col-md-2 control-label"><h:outputText value="#{i18n['message_username']}" /> <span class="f_req">*</span></label>
+                            <div class="col-md-10 #{not b_username.valid ? 'f_error' : ''}">
+								<h:inputText id="usertname" binding="#{b_username}"
+										styleClass="input-sm form-control"
+										 p:type="text"
+										 value="#{registerUserWizardBean.user.login.username}"
+										 required="true"
+										 requiredMessage="#{i18n['error_required']}"
+										></h:inputText>
+								<h:outputLabel class="error" style="display: block;" rendered="#{not b_username.valid}">
+									<h:message id="m1" for="usertname" />
+								</h:outputLabel>
+							</div>
+                        </div>
+                        <div class="formSep form-group">
+                            <label for="v_password" class="col-md-2 control-label">#{i18n['message_pwd']} <span class="f_req">*</span></label>
+                            <div class="col-md-10 #{not b_pwd1.valid ? 'f_error' : ''}">
+								<h:inputSecret id="pwd1" binding="#{b_pwd1}"
+										styleClass="input-sm form-control"
+										 value="#{registerUserWizardBean.user.login.pwd}"
+										 required="true"
+										 requiredMessage="#{i18n['error_required']}"
+										></h:inputSecret>
+								<h:outputLabel class="error" style="display: block;" rendered="#{not b_pwd1.valid}">
+									<h:message id="mp1" for="pwd1" />
+								</h:outputLabel>
+							</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="v_email" class="col-md-2 control-label">#{i18n['register_user_email']} <span class="f_req">*</span></label>
+                            <div class="col-md-10 #{not b_mail.valid ? 'f_error' : ''}">
+								<h:inputText id="mail" binding="#{b_mail}"
+										styleClass="input-sm form-control"
+										 value="#{registerUserWizardBean.user.mail}"
+										 required="true"
+										 requiredMessage="#{i18n['error_required']}"
+										>
+										 <f:validator validatorId="emailValidator" />
+									</h:inputText>
+								<h:outputLabel class="error" style="display: block;" rendered="#{not b_mail.valid}">
+									<h:message id="m2" for="mail" />
+								</h:outputLabel>
+								
+							</div>
+                        </div>
+                        <p id="validate_wizard-buttons-0" class="validate_wizard-buttons">
+                        	<a id="validate_wizard-next-0" href="javascript:navigateToTab('1');" class="btn btn-default button-next">
+                        	#{i18n['register_user_forward']} 
+                        	<i class="glyphicon glyphicon-chevron-right"></i>
+                        	</a>
+                        </p>
+                    </fieldset>
+                    <fieldset title="#{i18n['register_user_contact_info']}" class="step" id="validate_wizard-step-1" style="display: none;">
+                        <legend class="hide">Lorem ipsum dolor…</legend>
+                        <div class="formSep form-group">
+                            <label for="v_street" class="col-md-2 control-label">#{i18n['register_user_street']} </label>
+                            <div class="col-md-10">
+								<h:inputText id="addressId"
+										styleClass="input-sm form-control"
+										 value="#{registerUserWizardBean.user.adress}"
+										></h:inputText>
+							</div>
+                        </div>
+                        <div class="formSep form-group">
+                            <label for="v_city" class="col-md-2 control-label">#{i18n['register_user_city']} </label>
+                            <div class="col-md-10">
+								<h:inputText id="cityId"
+										styleClass="input-sm form-control"
+										 value="#{registerUserWizardBean.user.ville}"
+										></h:inputText>
+							</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="v_country" class="col-md-2 control-label">#{i18n['register_user_country']} </label>
+                            <div class="col-md-10">
+								<h:inputText id="countryId"
+										styleClass="input-sm form-control"
+										 value="#{registerUserWizardBean.user.pays}"
+										></h:inputText>
+							</div>
+                        </div>
+                        <p id="validate_wizard-buttons-1" class="validate_wizard-buttons">
+                        <a id="validate_wizard-back-1" href="javascript:navigateToTab('0');" class="btn btn-link button-back"><i class="glyphicon glyphicon-chevron-left"></i> #{i18n['register_user_backward']}</a>
+                        <a id="validate_wizard-next-1" href="javascript:navigateToTab('2');" class="btn btn-default button-next">#{i18n['register_user_forward']} <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        </p>
+                    </fieldset>
+					<fieldset title="Additional info" class="step" id="validate_wizard-step-2" style="display: none;">
+                        <legend class="hide">Lorem ipsum dolor…</legend>
+						<div class="formSep form-group">
+                            <label for="v_message" class="col-md-2 control-label">#{i18n['register_user_profession']} </label>
+                            <div class="col-md-10">
+								<h:inputText id="professionId"
+										styleClass="input-sm form-control"
+										 value="#{registerUserWizardBean.user.adress}"
+										></h:inputText>
+							</div>
+                        </div>
+                        
+                        <div class="formSep form-group">
+                            <label for="v_message" class="col-md-2 control-label">#{i18n['register_user_dateNaissance']} </label>
+                            <div class="col-md-10">
+								<h:inputText id="dp2" styleClass="input-sm form-control" value="#{registerUserWizardBean.user.dateNaissance}"
+							p:type="date">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:inputText>
+							</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">#{i18n['register_user_gender']} </label>
+                            <!--div class="col-md-10">
+								<label class="radio-inline" for="newsletter_yes">
+									<input type="radio" value="yes" id="newsletter_yes" name="v_newsletter"/> Yes
+								</label>
+								<label class="radio-inline" for="newsletter_no">
+									<input type="radio" value="no" id="newsletter_no" name="v_newsletter"/> No
+								</label>
+							</div-->
+							
+							
+					
+						<h:selectOneRadio value="#{registerUserWizardBean.user.sexe}" styleClass="myRadioGroup">
+						
+   							<f:selectItem id="sexe_m_id" itemValue="m" itemLabel="#{i18n['register_user_male']}  "/>
+   							
+   							
+   							<f:selectItem id="sexe_f_id" itemValue="f" itemLabel="#{i18n['register_user_female']}" />
+						</h:selectOneRadio>
+						<br/>
+                        </div>
+                        
+                        
+                        
+                        <p id="validate_wizard-buttons-2" class="validate_wizard-buttons">
+                        
+                        
+                        <a id="validate_wizard-back-2" href="javascript:navigateToTab('1');" class="btn btn-link button-back"><i class="glyphicon glyphicon-chevron-left"></i> #{i18n['register_user_backward']}</a>
+                        
+                        
+                        
+                        <button type="submit" jsf:action="#{registerUserWizardBean.doSave}"
+                        onclick="javascript:validateForm();"
+                         class="finish btn btn-primary">
+                        	<i class="glyphicon glyphicon-ok"></i> #{i18n['register_user_send_r']}</button>
+                        
+                        
+					 
+					 </p>
+					</fieldset>
+                </h:form>
+                
+                <!-- ____________________________ END FORM -->
+					</div>
+					</div>
+				</div>
+
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>
